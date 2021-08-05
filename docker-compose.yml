@@ -3,7 +3,7 @@ services:
     build: .
     ports:
       - "3003:3000"
-    # volumes:
-    #   - '.:/app'
+    volumes:
+      - '.:/app'
     environment:
       - CHOKIDAR_USEPOLLING=true
