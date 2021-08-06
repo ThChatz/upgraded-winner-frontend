@@ -3,38 +3,73 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import { Button } from 'bootstrap';
+//import Row from 'react-bootstrap/Row'
+//import Col from 'react-bootstrap/Col'
 import SearchField from "react-search-field";
 import { BsFillHouseDoorFill, BsPeopleFill, BsBriefcaseFill, BsFillCursorFill, BsFillBellFill } from "react-icons/bs";
+import { AiOutlineArrowUp } from "react-icons/ai"
+
+function NavHome() {
+    return (
+	<Nav.Link className="nav-item text-center" href="#Home">
+ 	    <BsFillHouseDoorFill size="30" title="Home" /><br/>
+ 	</Nav.Link>);
+}
+
+function NavNetwork() {
+    return (
+	<Nav.Link className="nav-item text-center" href="#Network">
+ 	    <BsPeopleFill size="30" title="Network" /><br/>
+ 	</Nav.Link>);
+}
+
+function NavJobs() {
+    return (
+	<Nav.Link className="nav-item text-center" href="#Jobs">
+ 	    <BsBriefcaseFill size="30" title="Jobs" /><br/>
+ 	</Nav.Link>);
+}
+
+function NavMessages() {
+    return (
+	<Nav.Link className="nav-item text-center" href="#Messages">
+ 	    <BsFillCursorFill size="30" title="Messages" /><br/>
+ 	</Nav.Link>);
+}
+
+function NavNotifications() {
+    return (
+	<Nav.Link className="nav-item text-center" href="#Notifications">
+ 	    <BsFillBellFill size="30" title="Notifications" /><br/>
+ 	</Nav.Link>);
+}
 
 class NavBar extends Component{
     render() {
         return (
             <>
-            <Navbar className="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
-                <Container className="container px-5">
-                <Navbar.Brand className="navbar-brand fw-bold" href="#home">Linked out</Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="me-auto">
-                    <SearchField
-                        placeholder="Search..."
-                        // onChange={onChange}
-                        searchText="Search..."
-                        classNames="test-class"
-                    />
-                    </Nav>
-                    <Nav>
-                        <Nav.Link className="nav-item" href="#Home"><BsFillHouseDoorFill size="30" title="Home" /><br/></Nav.Link>
-                        <Nav.Link className="nav-item" href="#Network"><BsPeopleFill size="30" title="Home" /><br/></Nav.Link>
-                        <Nav.Link className="nav-item" href="#Jobs"><BsBriefcaseFill size="30" title="Home" /><br/></Nav.Link>
-                        <Nav.Link className="nav-item" href="#Messaging"><BsFillCursorFill size="30" title="Home" /><br/></Nav.Link>
-                        <Nav.Link className="nav-item" href="#Notifications"><BsFillBellFill size="30" title="Home" /><br/></Nav.Link>
-                    </Nav>
-                </Navbar.Collapse>
-                </Container>
-            </Navbar>     
-            <br/>
-            <br/>  
+		<Container>
+		    <Navbar className="navbar-light fixed-top shadow-sm d-flex justify-content-between" >
+			<Navbar.Brand className="navbar-brand fw-bold" href="#home">
+			    <AiOutlineArrowUp style={{"float": "left"}} size="65"/>
+			    <text >Upgraded<br/>Winner</text>
+			</Navbar.Brand>
+			<SearchField
+			    placeholder="Search..."
+			    // onChange={onChange}
+			    classNames="test-class"
+			/>
+			<Nav>
+			    <NavHome />
+			    <NavNetwork />
+			    <NavJobs />
+			    <NavMessages />
+			    <NavNotifications />
+			</Nav>
+		    </Navbar>     
+		</Container>
+		<br/>
+		<br/>  
             </>
         );
     }
