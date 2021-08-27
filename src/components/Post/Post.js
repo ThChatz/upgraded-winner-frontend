@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import '../CreatePost/CreatePost.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
-import './Post.css'
+import './Post.css';
+import ReactButton from '../ReactButton/ReactButton';
+
 import { Avatar } from '@material-ui/core'
 import { CameraAlt, VideoCall, CalendarToday, Assignment } from '@material-ui/icons'
 const CreatePost = () => {
@@ -44,6 +46,8 @@ const CreatePost = () => {
 								{/* <p>lalala</p> */}
 							</div>
 							<div className="cardbox-base">
+							<ReactButton></ReactButton>
+
 								<ul className="float-right">
 									<li><a><i className="fa fa-comments"></i></a></li>
 									<li><a><em className="mr-5">12</em></a></li>
