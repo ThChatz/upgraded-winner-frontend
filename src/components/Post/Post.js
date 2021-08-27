@@ -9,9 +9,6 @@ const CreatePost = () => {
 
 	return (
 		<section>
-			<div className="container">
-				<div className="row">
-					<div className="col-lg-6 offset-lg-3">
 						<div className="cardbox shadow-lg bg-white">
 							<div className="cardbox-heading">
 								{/* <div className="dropdown float-right">
@@ -73,12 +70,6 @@ const CreatePost = () => {
 							</div>
 
 						</div>
-
-					</div>
-
-
-				</div>
-			</div>
 		</section>
 	)
 }

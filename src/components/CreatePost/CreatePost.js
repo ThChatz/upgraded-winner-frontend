@@ -6,10 +6,6 @@ import { CameraAlt, VideoCall, CalendarToday, Assignment } from '@material-ui/ic
 const CreatePost = () => {
 
     return (
-        <div className="container">
-            <div className="row">
-
-                <div className="col-lg-6 offset-lg-3">
                     <div className="cardbox shadow-lg bg-white">
                         <div className="messageSender">
                             <div className="messageSenderTop">
@@ -48,9 +44,6 @@ const CreatePost = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
     )
 }
 
