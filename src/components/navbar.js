@@ -19,7 +19,7 @@ class NavBar extends Component{
                     <SearchField
                         placeholder="Search..."
                         // onChange={onChange}
-                        searchText="Search..."
+                        // searchText="Search..."
                         classNames="test-class"
                     />
                     </Nav>
