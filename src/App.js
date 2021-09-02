@@ -2,7 +2,11 @@ import React from 'react';
 import NavBar from "./components/navbar.js";
 import './App.css';
 import HomePage from './components/HomePage/HomePage';
-import {Profile, RecentPhotos, RecentPosts} from './components/Profile/Profile';
+import Profile from './components/Profile/Profile';
+import RecentPhotos from './components/Profile/RecentPhotos';
+import RecentPosts from './components/Profile/RecentPosts';
+import Post from './components/Post/Post'
+import Feed from './components/Feed/Feed'
 
 function App() {
     return (
@@ -13,6 +17,8 @@ function App() {
 		     ProfileLocation="Ur Mom">
 		<RecentPhotos />
 		<RecentPosts />
+
+	 <Feed />
 	    </Profile>
 	</>
   );
