@@ -1,13 +1,9 @@
 services:
-  web:
+  build:
     image: node:13.12.0-alpine
-    ports:
-      - "3003:3000"
     volumes:
       - '.:/app'
     environment:
-      - CHOKIDAR_USEPOLLING=true
       - PATH=/app/node_modules/.bin:$PATH
-    command: ["sh", "-c", "npm install; npm start"]
+    command: ["npm", "run", "build"]
     working_dir: "/app"
-    
