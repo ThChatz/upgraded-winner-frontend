@@ -23,7 +23,7 @@ function Profile(props) {
                     </div>
 
                     <div className="profile mr-3 ">
-		    <img src={props.ProfilePicUrl} alt="..." width="130" className="rounded mb-2 img-thumbnail"/><br /><a href="#" className="btn btn-dark btn-sm btn-block">Edit profile</a></div>
+	    <img src={props.ProfilePicUrl} alt="..." width="130" className="rounded mb-2 img-thumbnail"/><br /><a href="#" className="btn btn-dark btn-sm btn-block">Edit profile</a></div>
                 </div>
             </div>
 	    

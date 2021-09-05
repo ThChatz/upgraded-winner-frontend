@@ -10,6 +10,8 @@ import ThumbDownRoundedIcon from '@material-ui/icons/ThumbDownAltRounded';
 import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
 import { useState, useRef } from 'react'
 
+import post from "axios";
+
 function ReactionPicker(props) {
     return (
         <Button variant="link" {...props}>
@@ -23,8 +25,19 @@ function ReactButton (props) {
 
     const [show, setShow] = useState(false);
     const self = useRef(null);
-    const [reaction, setReaction] = useState(0);
+    const [reaction, setReaction_] = useState(0);
     const reaction_content=["Like", "👍", "👎", "❤️"]
+    const post_id = props.post_id;
+
+
+    const setReaction = (reaction) => {
+	post("/actions/react/",
+	     {post: post_id,
+	      reaction: reaction})
+	    .catch(() => console.log("Could not connect to backend."))	
+	    .then(() => setReaction_(reaction));
+
+    }
 
     // TODO: send reaction to backend
 
@@ -53,7 +66,7 @@ function ReactButton (props) {
                 <Button variant="light"
                     onMouseOver={() => setShow(true)}
                     onMouseLeave={() => setShow(false)}
-                    onClick={() => setReaction(0)}
+			onClick={() => reaction === 0 ? setReaction(1) : setReaction(0)}
                     ref={self}>
 
                     {reaction_content[reaction]}
