@@ -12,8 +12,6 @@ function Feed(props) {
 
     const [items, setItems] = useState([]);
 
-    const [firstRun, setFirstRun] = useState(true);
-
     const next_fn = function () {
 	get(props.feedSrc+'/'+curPg)
 	    .catch(() => {setHasMore(false); return {"data": {"post_ids": []}}})

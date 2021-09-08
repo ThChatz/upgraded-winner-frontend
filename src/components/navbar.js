@@ -84,7 +84,7 @@ class NavBar extends Component{
         return (
             <>
 		<Container>
-		    <Navbar className="navbar-light fixed-top shadow-sm d-flex justify-content-between py-0" >
+		    <Navbar className="navbar-light fixed-top shadow-sm d-flex justify-content-between py-0">
 			<Navbar.Brand className="navbar-brand fw-bold" href="#profile">
 			    <AiOutlineArrowUp style={{"float": "left"}} size="60"/>
 			    <text>Upgraded<br/>Winner</text>
