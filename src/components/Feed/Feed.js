@@ -1,6 +1,6 @@
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Post from '../Post/Post.js';
 
@@ -14,6 +14,8 @@ function Feed(props) {
 
     const [items, setItems] = useState([]);
 
+    const [firstRun, setFirstRun] = useState(true);
+
     const next_fn = function () {
 	get(props.feedSrc+'/'+curPg)
 	    .catch(() => {setHasMore(false); return {"data": {"post_ids": []}}})
@@ -23,7 +25,7 @@ function Feed(props) {
     }
     
 
-
+    useEffect(next_fn, firstRun);
 
     return (
 	    <InfiniteScroll

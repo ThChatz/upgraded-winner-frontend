@@ -3,6 +3,7 @@ import NavBar from "./components/navbar.js";
 import './App.css';
 import FeedView from "./views/FeedView"
 import ProfileView from "./views/ProfileView"
+import NetworkView from "./views/NetworkView"
 import {HashRouter, Route, Switch} from "react-router-dom"
 
 
@@ -13,6 +14,7 @@ const App = (props) =>
 		  <Route path="/" component={FeedView} exact/>
 		  <Route path="/home" component={FeedView} exact/>
 		  <Route path="/profile" component={ProfileView} exact/>
+		  <Route path="/network" component={NetworkView} exact/>
 	      </Switch>
 	  </HashRouter>
       </>
