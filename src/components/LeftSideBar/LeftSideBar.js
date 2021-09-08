@@ -5,7 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 function LeftSideBar(props) {
     return (
-        <Card style={{ width: '18rem' }}>
+        <Card className = "bg-white shadow rounded  container" style={{ width: '18rem' }}>
             <Card.Img variant="top" src={props.profile_pic} />
             <Card.Body>
 		<Card.Title>{props.username}</Card.Title>
