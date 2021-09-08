@@ -50,7 +50,7 @@ class NavBar extends Component{
             <>
 		<Container>
 		    <Navbar className="navbar-light fixed-top shadow-sm d-flex justify-content-between py-0" >
-			<Navbar.Brand className="navbar-brand fw-bold" href="#home">
+			<Navbar.Brand className="navbar-brand fw-bold" href="#profile">
 			    <AiOutlineArrowUp style={{"float": "left"}} size="60"/>
 			    <text>Upgraded<br/>Winner</text>
 			</Navbar.Brand>

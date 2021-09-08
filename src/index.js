@@ -6,7 +6,7 @@ import App from "./App";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
-    <App />,
+    <App hashRoute={["feed"]}/>,
     
     document.getElementById("root")
 );
