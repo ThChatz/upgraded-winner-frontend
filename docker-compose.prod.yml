@@ -1,9 +1,6 @@
 services:
   build:
-    image: node:13.12.0-alpine
+    build: .
     volumes:
       - '.:/app'
-    environment:
-      - PATH=/app/node_modules/.bin:$PATH
     command: ["npm", "run", "build"]
-    working_dir: "/app"
