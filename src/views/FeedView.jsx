@@ -5,6 +5,7 @@ import LeftSideBar from "../components/LeftSideBar/LeftSideBar"
 import Profile from '../components/Profile/Profile';
 import Post from '../components/Post/Post'
 import Feed from '../components/Feed/Feed'
+import CreatePost from '../components/CreatePost/CreatePost'
 
 function FeedView() {
     return (
@@ -17,6 +18,7 @@ function FeedView() {
                         />
 	    </DefaultLayout.LeftSideBar>
 	    <DefaultLayout.Content>
+		<CreatePost />
 		<Feed feedSrc="/feed"/>
 	    </DefaultLayout.Content>
 	    

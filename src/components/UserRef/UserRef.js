@@ -7,15 +7,6 @@ import UserInfo from "../UserInfo/UserInfo"
 
 import "./UserRef.css";
 
-// const UserInfoPopover =  
-//       (<Popover id="test">
-// 	<Popover.Title></Popover.Title>
-// 	<Popover.Content>{}</Popover.Content>
-//      </Popover>);
-
-
-
-
 function UserRef(props) {
     const [show, setShow] = useState(false);
     const btn = useRef(null);
@@ -29,7 +20,6 @@ function UserRef(props) {
 		</Button>
 		<Overlay show={show} target={btn}>
 		    <Popover>
- 			<Popover.Title></Popover.Title>
  			<Popover.Content>{UserInfo(props)}</Popover.Content>
  		    </Popover>
 		</Overlay>

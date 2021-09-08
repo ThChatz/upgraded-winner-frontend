@@ -8,7 +8,7 @@ function LeftSideBar(props) {
 	      style={{"max-width": "18rem", "max-height": "30rem"}}>
             <Card.Img variant="top" src={props.profilePic} />
             <Card.Body>
-		<Card.Title>{UserRef(props)}</Card.Title>
+		<Card.Title>{props.profileName}</Card.Title>
 		<Card.Text>
 		    {props.profileBio}
 		</Card.Text>

@@ -12,7 +12,9 @@ const App = (props) =>
 	      <Switch>
 		  <Route path="/" component={FeedView} exact/>
 		  <Route path="/home" component={FeedView} exact/>
-		  <Route path="/profile" component={ProfileView} exact/>
+		  <Route path="/u/:user_id/" exact>
+		      <ProfileView />
+		  </Route>
 		  <Route path="/network" component={NetworkView} exact/>
 	      </Switch>
 	  </HashRouter>

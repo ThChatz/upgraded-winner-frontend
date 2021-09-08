@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import './Post.css';
 import ReactButton from '../ReactButton/ReactButton';
+import UserRef from '../UserRef/UserRef';
+
 
 import { Avatar } from '@material-ui/core'
 import { CameraAlt, VideoCall, CalendarToday, Assignment } from '@material-ui/icons'
@@ -52,7 +54,7 @@ const Post = (props) =>
 		</div>
 		<div className="media-body ">
 		    {/* Name */}
-		    <p className="m-0">{props.ProfileName}</p>
+		    <p className="m-0">{UserRef(props)}</p>
 		    {/* Location */}
 		    <small><span><i className="icon ion-md-pin"></i>{props.PostLocation}</span></small>
 		    {/* Time */}

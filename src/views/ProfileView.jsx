@@ -4,24 +4,45 @@ import Feed from "../components/Feed/Feed"
 
 import DefaultLayout from "../layouts/DefaultLayout";
 
+import get from "axios";
 
-function ProfileView() {
+import {HashRouter, Route, Switch, useParams} from "react-router-dom"
+import {useState, useEffect} from "react"
+
+
+function ProfileView(props) {
+    const [myAccount, setMyAccount] = useState({});
+    const [viewAccount, setViewAccount] = useState({});
+
+    const { user_id } = useParams();    
+
+    useEffect(() => {
+
+
+	get("/u/my-account")
+	    .catch((x) => {return {"data": {}}})
+	    .then((x) => x.data)
+	    .then((x) => setMyAccount(x));
+
+	get("/u/"+user_id)
+	    .catch((x) => {return {"data": {}}})
+	    .then((x) => x.data)
+	    .then((x) => setViewAccount(x))
+	    .then((x) => console.log(viewAccount));
+    }, []);
+    
+
+    
+
     return (
 	<DefaultLayout>
 	    <DefaultLayout.LeftSideBar>
-                        <LeftSideBar
-                            profile_pic="my-account/profile-pic.jpg"
-                            username="Hackerman"
-                            bio="I am hack yr comput0r :^(("
-                        />
+                <LeftSideBar {...myAccount} />
 	    </DefaultLayout.LeftSideBar>
 	    <DefaultLayout.Content>
-		<Profile ProfileName="hackerman"
-			 ProfilePicUrl="https://d19m59y37dris4.cloudfront.net/university/1-1-1/img/teacher-4.jpg"
-			 ProfileLocation="Ur Mom">
-		    
-		    <Feed feedSrc="/feed"/>
-		</Profile>
+	 	<Profile {...viewAccount}>
+	 	    <Feed feedSrc="/feed"/>
+	 	</Profile>
 	    </DefaultLayout.Content>
 	    
 	</DefaultLayout>);
