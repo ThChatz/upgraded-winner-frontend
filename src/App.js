@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from "./components/navbar.js";
 import './App.css';
 import FeedView from "./views/FeedView"
 import ProfileView from "./views/ProfileView"
