@@ -11,8 +11,8 @@ function FeedView() {
 	<DefaultLayout>
 	    <DefaultLayout.LeftSideBar>
                         <LeftSideBar
-                            profile_pic="my-account/profile-pic.jpg"
-                            username="Hackerman"
+                            profilePic="my-account/profile-pic.jpg"
+                            profileName="Hackerman"
                             bio="I am hack yr comput0r :^(("
                         />
 	    </DefaultLayout.LeftSideBar>

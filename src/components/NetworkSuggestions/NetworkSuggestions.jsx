@@ -10,24 +10,6 @@ import Post from '../Post/Post.js';
 
 import get from "axios";
 
-function _gridRows(components) {
-    let groups = [];
-    for (var i = 0; i < components.length; i+=3) {
-	let currGroup = components.slice(i, i+3);
-	let currGroup_comp =
-	    [...currGroup].map((x) =>
-	    <Col>{NetworkSuggestion(x)}</Col>);
-	
-	if(currGroup.length < 3){
-	    var filler = Array(3 - currGroup.length).fill(<Col/>);
-	    currGroup_comp = [...currGroup_comp, filler];
-	}
-							  
-	groups= [...groups, <Row>{currGroup_comp}</Row>];
-    }
-    console.log(i);
-    return groups;
-}
 
 const NetworkSuggestion = (props) =>
 <Card>
@@ -50,6 +32,8 @@ function NetworkSuggestions(props) {
     
     const [firstRun, setFirstRun] = useState(true);
 
+
+
     const next_fn = function () {
 	get(props.src+'/'+curPg)
 	    .catch(() => {setHasMore(false); return {"data": {"suggestions": []}}})
@@ -59,6 +43,13 @@ function NetworkSuggestions(props) {
     }
     
     useEffect(next_fn, firstRun);
+
+    const colProps = {
+	"lg": 3,
+	"md": 6,
+	"sm": 12,
+    }
+
 
     return (
 	<InfiniteScroll
@@ -72,7 +63,7 @@ function NetworkSuggestions(props) {
 	    endMessage={
 		<p style={{ textAlign: 'center' }}>
 		<b>Yay! You have seen it all</b></p>}>
-	    {_gridRows(items)}
+	    <Row>{items.map((x) => <Col {...colProps}>{NetworkSuggestion(x)}</Col>)}</Row>
 	</InfiniteScroll>
     )
 

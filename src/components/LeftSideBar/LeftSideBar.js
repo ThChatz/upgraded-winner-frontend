@@ -1,16 +1,16 @@
-import { Component } from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-
+import UserRef from "../UserRef/UserRef";
 
 function LeftSideBar(props) {
     return (
-        <Card className = "bg-white shadow rounded  container" style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={props.profile_pic} />
+        <Card className = "bg-white shadow rounded  container"
+	      style={{"max-width": "18rem", "max-height": "30rem"}}>
+            <Card.Img variant="top" src={props.profilePic} />
             <Card.Body>
-		<Card.Title>{props.username}</Card.Title>
+		<Card.Title>{UserRef(props)}</Card.Title>
 		<Card.Text>
-		    {props.bio}
+		    {props.profileBio}
 		</Card.Text>
             </Card.Body>
             <ListGroup className="list-group-flush">

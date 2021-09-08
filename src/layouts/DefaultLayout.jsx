@@ -8,17 +8,17 @@ import Col from 'react-bootstrap/Col';
 // This is the standard 3-column layout with a navbar
 
 const LeftSideBar = (props) =>
-<Col {...props}>
+<Col md={4} className="d-none d-md-flex" {...props}>
     {props.children}
 </Col>;
 
 const Content = (props) =>
-<Col xs={6} {...props}>
+<Col md={8} {...props}>
     {props.children}
 </Col>
 
 const RightSideBar = (props) =>
-<Col xs={2} {...props}>
+<Col xs={2} className={"d-none d-lg-flex" + props.className} {...props}>
     {props.children}
 </Col>;
 
