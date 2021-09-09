@@ -1,4 +1,6 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
+
 import NavBar from "../components/navbar.js";
 import DefaultLayout from "../layouts/DefaultLayout";
 import LeftSideBar from "../components/LeftSideBar/LeftSideBar";
@@ -14,10 +16,14 @@ import {useParams} from "react-router-dom"
 
 function MessagesView() {
 
+	const [threadId, setThreadId] = useState("no_thread");
+
 	const params = useParams();
-	const thread_id = params.thread_id === undefined ? 
-						"no_thread" : 
-						params.thread_id;
+
+	useEffect(() => {
+		if(params.thread_id !== undefined) {
+			setThreadId(params.thread_id);
+		}}, [params]);
 
 
 	document.body.style.overflow="hidden";
@@ -36,7 +42,7 @@ function MessagesView() {
 				"verticalAlign": "sub",
 				"width": "100%",
 				"bottom": "20%"}}>
-			    <Conversation src={"/t/" + thread_id} style={{"height": "84vh"}}/>
+			    <Conversation src={"/t/" + threadId} style={{"height": "84vh"}}/>
 			</div>
 			</Col>
 			<Col xs={2} />

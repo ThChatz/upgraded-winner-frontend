@@ -43,7 +43,9 @@ function Conversation(props) {
 
     const [items, setItems] = useState([]);
 
-    const next_fn = function () {
+	const [switchSrc, setSwitchSrc] = useState(true);
+	
+	const next_fn = function () {
 	get(props.src+'/'+curPg)
 	    .catch(() => {setHasMore(false); return {"data": {"messages": []}}})
 	    .then((response) => response.data.messages)
@@ -53,7 +55,19 @@ function Conversation(props) {
     }
     
 
-    useEffect(next_fn, []);
+    useEffect(() => {
+		setItems([]);
+		setPg(0);
+		setHasMore(true);
+		setSwitchSrc(true);
+	}, [props.src]);
+
+	useEffect(() => {
+		if(switchSrc === true) {
+			next_fn();
+			setSwitchSrc(false);
+		}
+	}, [switchSrc, next_fn]);
 
     return (
 		<>
