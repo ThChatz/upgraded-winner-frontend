@@ -1,0 +1,43 @@
+.conv {
+    /* background-color: #dfdfdf; */
+    border-width: 4px solid black;
+}
+
+.conv-row {
+    display: flex;    
+}
+
+.conv-row.left {
+    justify-content: flex-start !important;
+    border: 2px;
+}
+
+.conv-row.right {
+    justify-content: flex-end !important;
+}
+
+
+.conv-bubble {
+    opacity: .8;
+    font-size: 1.2em;
+    padding: .5em 2em;
+    margin: .4em;
+    width: auto;
+    display: inline-block;
+}
+
+.conv-bubble.red {
+    background-color: #ff6161;
+}
+
+.conv-bubble.blue {
+    background-color: #6161ff;
+}
+
+.conv-bubble.left {
+    border-radius: 100px 100px 100px 0px;
+}
+
+.conv-bubble.right {
+    border-radius: 100px 100px 0 100px;
+}

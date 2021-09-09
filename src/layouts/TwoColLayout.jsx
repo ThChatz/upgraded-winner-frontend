@@ -24,7 +24,7 @@ function TwoColLayout(props) {
 	props.children.find(({ type }) => type === Content);
 
     return(
-	<Col>
+	<Col {...props}>
 	    <NavBar />
 	    <Container className="py-5">
 		<Row>
