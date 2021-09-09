@@ -2,6 +2,7 @@
     "friends" : [
 {
 	    "profilePic": "/my-account/profile-pic.jpg",
+		"threadId": "test-thread",
 	    "profileName": "Bob Ross",
 	    "profileId": "hackerman",
 	    "profileBio": "I hack your mom",

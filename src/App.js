@@ -19,8 +19,9 @@ const App = (props) =>
 		  </Route>
 		  <Route path="/network" component={NetworkView} exact/>
 		  <Route path="/jobs" component={JobView} exact />
-		  <Route path="/messages" component={MessagesView} exact />
-	      </Switch>
+		  <Route path="/messages/" component={MessagesView} exact />
+	      <Route path="/messages/:thread_id" component={MessagesView} exact/>
+		  </Switch>
 	  </HashRouter>
       </>
 

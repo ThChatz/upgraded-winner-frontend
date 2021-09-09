@@ -1,6 +1,11 @@
 .conv {
     /* background-color: #dfdfdf; */
     border-width: 4px solid black;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column-reverse;
+    box-sizing: unset;
 }
 
 .conv-row {
@@ -40,4 +45,18 @@
 
 .conv-bubble.right {
     border-radius: 100px 100px 0 100px;
+}
+
+.send-message.form {
+    position: sticky;
+}
+
+.send-message.control {
+    width: 90% !important;
+    display: inline-block;
+}
+
+.send-message.submit {
+    width: 10% !important;
+    height: 100% !important;
 }

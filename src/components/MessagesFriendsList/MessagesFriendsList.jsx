@@ -2,17 +2,22 @@ import { useState, useEffect } from 'react';
 import get from "axios";
 
 import Media from 'react-bootstrap/Media';
+import Button from 'react-bootstrap/Button';
+
 import ListGroup from 'react-bootstrap/ListGroup';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
+
 const FriendListItem = (props) =>
+<a href={"#/Messages/"+props.threadId}>
 <Media>
-    <img src={props.profilePic} />
+    <img src={props.profilePic} alt={props.profileName}/>
     <Media.Body>
 	<h5>{props.profileName}</h5>
 	<p>{props.lastMessage}</p>
     </Media.Body>
-</Media>;
+</Media>
+</a>;
 
 
 function MessagesFriendList(props) {
@@ -37,7 +42,8 @@ function MessagesFriendList(props) {
 	<div style={{"overflow": "auto",
 		     "height": "80%",
 		     "display": "flex",
-		     "flexDirection": "column"}}>
+		     "flexDirection": "column",
+			 "boxSizing": "unset"}}>
 	<InfiniteScroll
 	    dataLength={items.length}
 	    next={next_fn}
