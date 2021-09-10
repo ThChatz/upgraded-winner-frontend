@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Popover from 'react-bootstrap/Popover';
 import Button from 'react-bootstrap/Button'
-//import Row from 'react-bootstrap/Row'
+import Media from 'react-bootstrap/Media';
 //import Col from 'react-bootstrap/Col'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import SearchField from "react-search-field";
@@ -39,11 +39,52 @@ function NavMessages() {
  	</Nav.Link>);
 }
 
+{/* Notification Link */}
+const NotificationsItem = (props) =>
+<a href={"#/"}> 
+<Media>
+    <img src={props.profilePic} alt={props.profileName}/>
+    <Media.Body>
+	<p>The user {props.profileName} {props.notification}</p>
+    </Media.Body>
+</Media>
+</a>;
+
+
+
+const notifications_popover = (
+	<Popover>
+		<NotificationsItem 
+			profileName = "HackerMAn"
+			profilePic = "/my-account/profile-pic.jpg"
+			notification = "commented on your photo"
+			/> 
+		<NotificationsItem 
+			profileName = "HackerMAn"
+			profilePic = "/my-account/profile-pic.jpg"
+			notification = "commented on your photo"
+			/> 
+		 {/* ... */}
+	</Popover>
+	
+	);
+
+
 function NavNotifications() {
     return (
-	<Nav.Link className="nav-item text-center" href="#Notifications">
+
+
+	<OverlayTrigger
+		placement="bottom"
+		trigger="click"
+		overlay={notifications_popover}>
+	<Nav.Link className="nav-item text-center">
  	    <BsFillBellFill size="30" title="Notifications" /><br/>
- 	</Nav.Link>);
+ 	</Nav.Link>
+	</OverlayTrigger>
+
+
+	);
 }
 
 
