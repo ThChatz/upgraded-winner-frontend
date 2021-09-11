@@ -6,13 +6,17 @@ import NetworkView from "./views/NetworkView"
 import MessagesView from "./views/MessagesView"
 import JobView from "./views/JobView"
 import { HashRouter, Route, Switch } from "react-router-dom"
-import WelcomePage from './components/WelcomePage/WelcomePage';
+import SignUpView from './views/SignUpView';
+import LoginView from './views/LoginView';
+import WelcomePageView from './views/WelcomePageView';
 
 const App = (props) =>
 	<>
 		<HashRouter>
 			<Switch>
-				<Route path="/" component={FeedView} exact />
+				<Route path="/" component={WelcomePageView} exact />
+				<Route path="/signup" component={SignUpView} exact />
+				<Route path="/login" component={LoginView} exact />
 				<Route path="/home" component={FeedView} exact />
 				<Route path="/u/:user_id/" exact>
 					<ProfileView />

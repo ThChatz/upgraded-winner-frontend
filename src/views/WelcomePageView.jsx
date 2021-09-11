@@ -6,8 +6,8 @@ import { AiOutlineArrowUp } from "react-icons/ai"
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Image from 'react-bootstrap/Image';
-import Login from '../Login';
-import Footer from '../Footer/Footer';
+import Login from './LoginView';
+import Footer from '../components/Footer/Footer';
 
 class WelcomePage extends Component {
     render() {
