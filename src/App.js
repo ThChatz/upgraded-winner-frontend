@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import FeedView from "./views/FeedView"
 import ProfileView from "./views/ProfileView"
@@ -10,23 +10,39 @@ import SignUpView from './views/SignUpView';
 import LoginView from './views/LoginView';
 import WelcomePageView from './views/WelcomePageView';
 
+import get from 'axios';
+
+const RequireAuth = (props) => {
+    const [pageContents, setPageContents] = useState(<></>);
+
+    useEffect(() =>
+	get("/session")
+	    .then((resp) => resp.status === 200 && setPageContents(props.children))
+	    .catch((resp) => setPageContents(<WelcomePageView />)),
+	[props.children])
+    return <>{pageContents}</>;
+}
+      
+
 const App = (props) =>
-	<>
+
 		<HashRouter>
 			<Switch>
 				<Route path="/" component={WelcomePageView} exact />
 				<Route path="/signup" component={SignUpView} exact />
 				<Route path="/login" component={LoginView} exact />
-				<Route path="/home" component={FeedView} exact />
-				<Route path="/u/:user_id/" exact>
+			    	<RequireAuth>
+				    <Route path="/home" component={FeedView} exact />
+				    <Route path="/u/:user_id/" exact>
 					<ProfileView />
-				</Route>
-				<Route path="/network" component={NetworkView} exact />
-				<Route path="/jobs" component={JobView} exact />
-				<Route path="/messages/:thread_id" component={MessagesView} exact />
-			</Switch>
+				    </Route>
+				    <Route path="/network" component={NetworkView} exact />
+				    <Route path="/jobs" component={JobView} exact />
+				    <Route path="/messages/:thread_id" component={MessagesView} exact />
+				</RequireAuth>
+				</Switch>
 		</HashRouter>
-		{/* <WelcomePage /> */}
-	</>
+
 
 export default App;
+ 
