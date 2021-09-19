@@ -8,7 +8,8 @@ import Form from "react-bootstrap/Form";
 
 export default class SignUp extends Component {
     render() {
-        const onSubmit = submitHandler("post", "/user");
+        const onSubmit = submitHandler("post", "/user", {})
+	      
 
         return (
             <div className="auth-wrapper">
@@ -19,7 +20,8 @@ export default class SignUp extends Component {
                         <Form.Group>
 
                             <Form.Label>Profile picture</Form.Label>
-                            <Form.Control type="file" name="picture" />
+                            <Form.Control type="file" name="picture"
+					  onChange={(e) => console.log(e.target.files[0])}/>
 
                             <Form.Label>First name</Form.Label>
                             <Form.Control type="text"

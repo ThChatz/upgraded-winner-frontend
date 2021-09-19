@@ -25,40 +25,48 @@ const RequireAuth = (props) => {
 	return <>{pageContents}</>;
 }
 
-const AppContext = createContext({'context': {}, 'setContext': () => {}});
+const UserContext = createContext({'user': {}, 'setUser': () => {}});
+const ErrorContext = createContext({'error': {}, 'setError': () => {}});
 
 const App = (props) => {
     
-    const [error, setError] = useState({})    
-    const [context, setContext] = useState({error, setError});
+    const [error, setError] = useState({})
+    const [user, setUser] = useState({})    
+    const [context, setContext] = useState({error: error,
+					    setError: setError,
+					    user: user,
+					    setUser: setUser});
 
 
     return (
 	<>
-	    <AppContext.Provider value={{'context': context, 'setContext': setContext}}>
-		<Error {...error}/>
-		<HashRouter>
-		    <Switch>
-			<Route path="/signup" component={SignUpView} exact />
-			<Route path="/login" component={LoginView} exact />
-			<Route path="/install" component={CreateAdmin} />
-			<RequireAuth>
-			    <Route path="/" component={FeedView} exact />
-			    <Route path="/home" component={FeedView} exact />
-			    <Route path="/u/:user_id/" exact>
-				<ProfileView />
-			    </Route>
-			    <Route path="/network" component={NetworkView} exact />
-			    <Route path="/jobs" component={JobView} exact />
-			    <Route path="/messages/:thread_id" component={MessagesView} exact />
-			</RequireAuth>
+	    <UserContext.Provider value={{'user': user, 'setUser': setUser}}>
+		<ErrorContext.Provider value={{'error': error, 'setError': setError}}>
+		    <Error {...error}/>
+		    <HashRouter>
+			<Switch>
+			    <Route path="/signup" component={SignUpView} exact />
+			    <Route path="/login" component={LoginView} exact />
+			    <Route path="/install" component={CreateAdmin} />
+			    <RequireAuth>
+				<Route path="/" component={FeedView} exact />
+				<Route path="/home" component={FeedView} exact />
+				<Route path="/u/:user_id/" exact>
+				    <ProfileView />
+				</Route>
+				<Route path="/network" component={NetworkView} exact />
+				<Route path="/jobs" component={JobView} exact />
+				<Route path="/messages/:thread_id" component={MessagesView} exact />
+			    </RequireAuth>
 
-		    </Switch>
-		</HashRouter>
-	    </AppContext.Provider>
+			</Switch>
+		    </HashRouter>
+		</ErrorContext.Provider>
+	    </UserContext.Provider>
 	</>);
 }
 
-App.Context = AppContext;
+App.UserContext = UserContext;
+App.ErrorContext = ErrorContext;
 export default App;
 

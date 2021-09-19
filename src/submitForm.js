@@ -1,6 +1,6 @@
 import {request, get} from 'axios';
 
-const submitHandler = (method, url) =>
+const submitHandler = (method, url, opts={}) =>
       (event) => {
 	  event.preventDefault();
 	  const formData = new FormData(event.currentTarget);
@@ -8,20 +8,20 @@ const submitHandler = (method, url) =>
 	  for (let [k, v] of formData.entries()) {
 	      entries[k] = v;
 	  }
-	  
-	  requestWithCsrf(method, url)(entries);
+	  console.log(entries)
+	  return requestWithCsrf(method, url, opts)(entries)
       }
 
-const requestWithCsrf = (method, url) =>
+const requestWithCsrf = (method, url, opts={}) =>
       (body) =>
       get("/anti-forgery-token")
       .then((resp) => resp.data.token)
       .then((tok) => ({ method: method,
 		       url: url,
 		       data: {"__anti-forgery-token": tok, ...body},
-		       withCredentials: true}))
+		       withCredentials: true, ...opts}))
       .then((x) => request(x))
-      .catch((x) => console.log(x));
+      .catch((x) => {console.log(x); return x});
       
 
 export {submitHandler, requestWithCsrf}; 
