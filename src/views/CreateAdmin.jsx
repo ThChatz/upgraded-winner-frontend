@@ -40,21 +40,7 @@ export default class CreateAdmin extends Component {
                             <Form.Label>Confirm password</Form.Label>
                             <Form.Control type="password"
                                 placeholder="Retype your password" />
-                            <br />
-                            <h3>Create Database</h3>
-                            <Form.Label>Database Name</Form.Label>
-                            <Form.Control type="text"
-                                name="dbname"
-                                placeholder="db" />
-
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password"
-                                name="password"
-                                placeholder="Enter your password" />
-                            <Form.Label>Confirm password</Form.Label>
-                            <Form.Control type="password"
-                                placeholder="Retype your password" />
-
+                            
                         </Form.Group>
 
 
