@@ -9,6 +9,7 @@ import { HashRouter, Route, Switch } from "react-router-dom"
 import SignUpView from './views/SignUpView';
 import LoginView from './views/LoginView';
 import WelcomePageView from './views/WelcomePageView';
+import CreateAdmin from './views/CreateAdmin';
 
 import get from 'axios';
 
@@ -31,6 +32,7 @@ const App = (props) =>
 			<Route path="/" component={FeedView} exact />
 			<Route path="/signup" component={SignUpView} exact />
 			<Route path="/login" component={LoginView} exact />
+			<Route path="/install" component={CreateAdmin} />
 			<RequireAuth>
 				<Route path="/home" component={FeedView} exact />
 				<Route path="/u/:user_id/" exact>
@@ -42,7 +44,7 @@ const App = (props) =>
 			</RequireAuth>
 		</Switch>
 	</HashRouter>
-
+	
 
 export default App;
 
