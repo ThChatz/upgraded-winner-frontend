@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import './CreatePost.css'
 // icons
 import { Avatar } from '@material-ui/core'
-import { CameraAlt, VideoCall, CalendarToday, Assignment } from '@material-ui/icons'
+import { CameraAlt, VideoCall, CalendarToday, Assignment, Audiotrack} from '@material-ui/icons'
+
+import Form from "react-bootstrap/Form";
+
 const CreatePost = () => {
 
     return (
@@ -10,16 +13,18 @@ const CreatePost = () => {
                         <div className="messageSender">
                             <div className="messageSenderTop">
                                 <Avatar>H</Avatar>
-                                <form>
-                                    <input
-                                        value=""
+                                <Form>
+                                    <Form.Control
                                         className="messageSenderInput"
                                         placeholder={`What's on your mind?`}
                                     />
 
                                     <button type="submit"></button>
-                                </form>
+
+                                </Form>
+
                             </div>
+
 
                             <div className="messageSenderBottom">
                                 <div className="messageSenderOption">
@@ -33,14 +38,10 @@ const CreatePost = () => {
                                 </div>
 
                                 <div className="messageSenderOption">
-                                    <CalendarToday />
-                                    <h3>Event</h3>
+                                    <Audiotrack />
+                                    <h3>Audio</h3>
                                 </div>
 
-                                <div className="messageSenderOption">
-                                    <Assignment />
-                                    <h3>Write Article</h3>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -48,3 +49,9 @@ const CreatePost = () => {
 }
 
 export default CreatePost;
+
+
+
+
+
+
