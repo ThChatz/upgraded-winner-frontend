@@ -35,10 +35,10 @@ const App = (props) => {
 
     return (
 	<>
-	    <Error {...error}/>
-	<HashRouter>
-		<Switch>
-		    <AppContext.Provider value={{'context': context, 'setContext': setContext}}>
+	    <AppContext.Provider value={{'context': context, 'setContext': setContext}}>
+		<Error {...error}/>
+		<HashRouter>
+		    <Switch>
 			<Route path="/signup" component={SignUpView} exact />
 			<Route path="/login" component={LoginView} exact />
 			<Route path="/install" component={CreateAdmin} />
@@ -52,10 +52,11 @@ const App = (props) => {
 			    <Route path="/jobs" component={JobView} exact />
 			    <Route path="/messages/:thread_id" component={MessagesView} exact />
 			</RequireAuth>
-		    </AppContext.Provider>
-		</Switch>
-	</HashRouter>
-	    </>);
+
+		    </Switch>
+		</HashRouter>
+	    </AppContext.Provider>
+	</>);
 }
 
 App.Context = AppContext;
