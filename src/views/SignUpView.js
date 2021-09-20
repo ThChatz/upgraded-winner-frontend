@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { submitHandler } from "../submitForm.js";
+import { submitHandler, submitHandlerMultipart } from "../submitForm.js";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -13,13 +13,19 @@ export default class SignUp extends Component {
         return (
             <div className="auth-wrapper">
                 <div className="auth-inner">
+		    <Form onSubmit={submitHandlerMultipart("post", "/user/profile-pic")}>
+                        <Form.Label>Profile picture</Form.Label>
+                        <Form.Control type="file"
+				      name="picture" />
+                        <button type="submit" className="btn btn-primary btn-block">Upload</button>			
+		    </Form>
+
+
                     <Form onSubmit={onSubmit}>
                         <h3>Sign Up</h3>
 
                         <Form.Group>
 
-                            <Form.Label>Profile picture</Form.Label>
-                            <Form.Control type="file" name="picture" />
 
                             <Form.Label>First name</Form.Label>
                             <Form.Control type="text"

@@ -29,7 +29,7 @@ const AppContext = createContext({'context': {}, 'setContext': () => {}});
 
 const App = (props) => {
     
-    const [error, setError] = useState({})    
+    const [error, setError] = useState({})
     const [context, setContext] = useState({error, setError});
 
 
@@ -42,8 +42,9 @@ const App = (props) => {
 			<Route path="/signup" component={SignUpView} exact />
 			<Route path="/login" component={LoginView} exact />
 			<Route path="/install" component={CreateAdmin} />
-			<RequireAuth>
 			    <Route path="/" component={FeedView} exact />
+			<RequireAuth>
+
 			    <Route path="/home" component={FeedView} exact />
 			    <Route path="/u/:user_id/" exact>
 				<ProfileView />

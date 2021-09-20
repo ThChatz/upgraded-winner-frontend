@@ -12,6 +12,26 @@ const submitHandler = (method, url) =>
 	  requestWithCsrf(method, url)(entries);
       }
 
+const submitHandlerMultipart = (method, url) =>
+      (event) => {
+	  event.preventDefault();
+	  const formData = new FormData(event.currentTarget);
+	  const entries = {};
+	  for (let [k, v] of formData.entries()) {
+	      entries[k] = v;
+	  }
+	  
+	  return get("/anti-forgery-token")
+	      .then((resp) => resp.data.token)
+	      .then((tok) => request({method: method,
+				     url: url,
+				     data: formData,
+				     withCredentials: true,
+				     headers: {"X-CSRF-TOKEN": tok}}))
+	      .catch((x) => console.log(x));
+      }
+
+
 const requestWithCsrf = (method, url) =>
       (body) =>
       get("/anti-forgery-token")
@@ -24,4 +44,4 @@ const requestWithCsrf = (method, url) =>
       .catch((x) => console.log(x));
       
 
-export {submitHandler, requestWithCsrf}; 
+export {submitHandler, submitHandlerMultipart, requestWithCsrf}; 
