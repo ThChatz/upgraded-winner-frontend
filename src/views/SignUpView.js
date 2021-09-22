@@ -14,10 +14,10 @@ export default class SignUp extends Component {
         return (
             <div className="auth-wrapper">
                 <div className="auth-inner">
-		    <Form onSubmit={submitHandlerMultipart("post", "/user/profile-pic")}>
+		    <Form onSubmit={submitHandlerMultipart("post", "/media/image")}>
                         <Form.Label>Profile picture</Form.Label>
                         <Form.Control type="file"
-				      name="picture" />
+				      name="file" />
                         <button type="submit" className="btn btn-primary btn-block">Upload</button>			
 		    </Form>
 
