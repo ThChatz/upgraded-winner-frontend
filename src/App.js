@@ -12,6 +12,7 @@ import WelcomePageView from './views/WelcomePageView';
 import CreateAdmin from './views/CreateAdmin';
 import Error from './components/error.jsx';
 import Admin from './views/Admin';
+import DynamicInput from './components/DynamicInput';
 import get from 'axios';
 
 const RequireAuth = (props) => {

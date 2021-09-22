@@ -2,7 +2,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
-
+import DynamicInput from "../DynamicInput";
 
 function UpdateProfile() {
 
@@ -35,6 +35,7 @@ function UpdateProfile() {
 
                 </Row>
             </Container>
+            <DynamicInput />
         </Form>
 
     );
