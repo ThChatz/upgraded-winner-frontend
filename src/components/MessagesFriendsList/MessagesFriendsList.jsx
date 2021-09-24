@@ -9,7 +9,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 const FriendListItem = (props) =>
-<a href={"#/Messages/"+(props.threadId === undefined ? 
+<a href={"#/Conversations/"+(props.threadId === undefined ? 
 						"no_thread" : props.threadId)}>
 <Media>
     <img src={props.profilePic} alt={props.profileName}/>

@@ -34,7 +34,7 @@ function NavJobs() {
 
 function NavMessages() {
     return (
-	<Nav.Link className="nav-item text-center" href="#Messages">
+	<Nav.Link className="nav-item text-center" href="#Conversations">
  	    <BsFillCursorFill size="30" title="Messages" /><br/>
  	</Nav.Link>);
 }

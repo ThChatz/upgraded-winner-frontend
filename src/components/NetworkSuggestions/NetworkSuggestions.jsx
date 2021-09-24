@@ -6,20 +6,9 @@ import Row from "react-bootstrap/Row";
 import { useState, useRef, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Post from '../Post/Post.js';
-
+import UserInfo from "../UserInfo/UserInfo.js";
 
 import get from "axios";
-
-
-const NetworkSuggestion = (props) =>
-<Card>
-    <Card.Img variant="top" src={props.profilePic} />
-    <Card.Body>
-	<Card.Title>{props.profileName}</Card.Title>
-	<Card.Text>{props.profileJob}</Card.Text>
-	<Button style={{"font-size": "0.9em"}} variant="outline-primary">Connect</Button>
-    </Card.Body>
-</Card>;
 
 
 function NetworkSuggestions(props) {
@@ -63,7 +52,7 @@ function NetworkSuggestions(props) {
 	    endMessage={
 		<p style={{ textAlign: 'center' }}>
 		<b>Yay! You have seen it all</b></p>}>
-	    <Row>{items.map((x) => <Col {...colProps}>{NetworkSuggestion(x)}</Col>)}</Row>
+	    <Row>{items.map((x) => <Col {...colProps}>{UserInfo(x)}</Col>)}</Row>
 	</InfiniteScroll>
     )
 

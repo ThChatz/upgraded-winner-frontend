@@ -14,42 +14,33 @@ import Container from "react-bootstrap/Container";
 
 import {useParams} from "react-router-dom"
 
+const MessagesView_ = (props) =>
+<Col>
+<NavBar />
+<Container className="py-5" style={{"max-width": "100%"}}>
+	<Row>
+	<Col xs={3}>
+		<MessagesFriendList src="/conversations"/>
+	</Col>
+	<Col xs={7} style={{"position": "relative"}}>
+	<div style={{
+		"position": "absolute",
+		"verticalAlign": "sub",
+		"width": "100%",
+		"bottom": "20%"}}>
+		<Conversation src={"/conversations/" + props.thread_id} style={{"height": "84vh"}}/>
+	</div>
+	</Col>
+	<Col xs={2} />
+	</Row>
+</Container>
+</Col>
+
+
 function MessagesView() {
-
-	const [threadId, setThreadId] = useState("no_thread");
-
 	const params = useParams();
-
-	useEffect(() => {
-		if(params.thread_id !== undefined) {
-			setThreadId(params.thread_id);
-		}}, [params]);
-
-
 	document.body.style.overflow="hidden";
-    return (
-	<>
-	    <Col>
-		<NavBar />
-		<Container className="py-5" style={{"max-width": "100%"}}>
-		    <Row>
-			<Col xs={3}>
-			    <MessagesFriendList src="/chats"/>
-			</Col>
-			<Col xs={7} style={{"position": "relative"}}>
-			<div style={{
-				"position": "absolute",
-				"verticalAlign": "sub",
-				"width": "100%",
-				"bottom": "20%"}}>
-			    <Conversation src={"/t/" + threadId} style={{"height": "84vh"}}/>
-			</div>
-			</Col>
-			<Col xs={2} />
-		    </Row>
-		</Container>
-	    </Col>
-	</>);
+    return (<MessagesView_ thread_id={params.thread_id} />);
 }
 
 export default MessagesView;

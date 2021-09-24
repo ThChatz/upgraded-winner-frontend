@@ -4,7 +4,8 @@
 	    "profileId": "foo",
 	    "profilePic": "/my-account/profile-pic.jpg",
 	    "profileName": "Foo",
-	    "profileJob": "Bar"
+	    "profileJob": "Bar",
+		"connected": true
 	},
 	{
 	    "profileId": "foo",
