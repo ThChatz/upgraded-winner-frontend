@@ -71,13 +71,18 @@ const notifications_popover = (
 
 
 function NavNotifications() {
+	const ref = useRef();
+	const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     return (
 
 
 	<OverlayTrigger
 		placement="bottom"
 		trigger="click"
-		overlay={notifications_popover}>
+		overlay={notifications_popover}
+		rootClose>
 	<Nav.Link className="nav-item text-center">
  	    <BsFillBellFill size="30" title="Notifications" /><br/>
  	</Nav.Link>
@@ -111,7 +116,8 @@ function NavAccount() {
 		<OverlayTrigger
 			placement="bottom"
 			trigger="click"
-			overlay={popover}>
+			overlay={popover}
+			rootClose>
 			<Nav.Link className = "nav-item text-center">
 				<BsPeopleCircle size = "30" title = "Account" /> 
 			</Nav.Link>
