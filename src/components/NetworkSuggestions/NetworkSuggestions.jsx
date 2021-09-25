@@ -45,7 +45,7 @@ function NetworkSuggestions(props) {
 	    dataLength={items.length > 0 ? 1 : items.length}
 	    next={next_fn}
 	    hasMore={hasMore}
-	    loader={<Loader onLoad={next_fn}/>}
+	    loader={<h4 onLoad={next_fn}>Loading ...</h4>}
 	    style={{
 		"overflow-x": "hidden"
 	    }}

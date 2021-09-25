@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
-
+import ModalImage from 'react-modal-image';
 function AddJobModal(props) {
 
 	const [show, setShow] = useState(false);

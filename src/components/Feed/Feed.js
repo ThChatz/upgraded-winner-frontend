@@ -30,12 +30,7 @@ function Feed(props) {
 			dataLength={items.length}
 			next={next_fn}
 			hasMore={hasMore}
-
-			loader={
-				<Loader />
-			}
-
-
+			loader={<Loader />}
 			endMessage={
 				< p style={{ textAlign: 'center' }}>
 					<b>Yay! You have seen it all</b></p >}>

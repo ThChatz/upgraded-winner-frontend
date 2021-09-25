@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import UpdateProfile from "../UpdateProfile/UpdateProfile";
-
+import OpenPhoto from "../OpenPhotos";
 function EditProfileModal(props) {
 
     const [show, setShow] = useState(false);
@@ -58,7 +58,9 @@ function Profile(props) {
                     </div>
 
                     <div className="profile mr-3 ">
-                        <img src={props.profilePic} alt="..." width="130" className="rounded mb-2 img-thumbnail" />
+                        
+                        <OpenPhoto profilePic = {props.profilePic}/>
+                        {/* <img src={props.profilePic} alt="..." width="130" className="rounded mb-2 img-thumbnail" /> */}
                         <br />
                         <EditProfileModal />
                     </div>
