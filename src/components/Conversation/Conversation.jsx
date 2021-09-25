@@ -17,10 +17,7 @@ import { BubbleChart } from '@material-ui/icons';
 
 const MessageForm = (props) =>
 	<Row>
-		<Form onSubmit={() => {
-			submitHandler('post', props.src);
-			props.refresh_fn();
-		}}
+		<Form onSubmit={submitHandler('post', props.src)}
 			className="send-message form">
 			<Form.Control type="text"
 				placeholder="Enter your message."
@@ -45,16 +42,16 @@ const Bubble = (props) =>
 
 function Conversation(props) {
 	return (
-		<>
+	    <div style={{minHeight: "100%"}}>
 		<FetchScroll 
 			className="conv" 
 			id="conv" 
 			InfScrollStyle={{ display: 'flex', flexDirection: 'column-reverse' }}
 			inverse={true}
 			mapFn={Bubble}
-			src={props.src} />
+		    src={props.src}/>
 			<MessageForm />
-		</>
+		</div>
 	);
 
 }

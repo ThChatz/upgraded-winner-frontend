@@ -27,7 +27,7 @@ const MessagesView_ = (props) =>
 		"position": "absolute",
 		"verticalAlign": "sub",
 		"width": "100%",
-		"bottom": "20%"}}>
+		"bottom": "0"}}>
 		<Conversation src={"/conversations/" + props.thread_id} style={{"height": "84vh"}}/>
 	</div>
 	</Col>
