@@ -51,7 +51,7 @@ function MessagesFriendList(props) {
 	    dataLength={items.length}
 	    next={next_fn}
 	    hasMore={hasMore}
-	    loader={<Loader/>}
+	    loader={<h4>Loading...</h4>}
 	    endMessage={
 		<p style={{ textAlign: 'center' }}>
 		<b>Yay! You have seen it all</b></p>}>
