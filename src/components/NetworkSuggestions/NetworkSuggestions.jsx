@@ -7,7 +7,7 @@ import { useState, useRef, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Post from '../Post/Post.js';
 import UserInfo from "../UserInfo/UserInfo.js";
-
+import Loader from '../Loader';
 import get from "axios";
 
 
@@ -45,7 +45,7 @@ function NetworkSuggestions(props) {
 	    dataLength={items.length > 0 ? 1 : items.length}
 	    next={next_fn}
 	    hasMore={hasMore}
-	    loader={<h4 onLoad={next_fn}>Loading...</h4>}
+	    loader={<Loader onLoad={next_fn}/>}
 	    style={{
 		"overflow-x": "hidden"
 	    }}

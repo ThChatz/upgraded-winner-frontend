@@ -3,6 +3,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { useState, useEffect } from 'react';
 
 import get from 'axios';
+import Loader from '../Loader';
 
 
 function FetchScroll(props) {
@@ -66,7 +67,7 @@ function FetchScroll(props) {
 					scrollableTarget="conv"
 					style={props.InfScrollStyle}
 					inverse={props.inverse}
-					loader={<h4>Loading...</h4>}
+					loader={<Loader/>}
 					refreshFunction={refresh_fn}
 					endMessage={
 						<p style={{ textAlign: 'center' }}>

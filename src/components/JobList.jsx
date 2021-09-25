@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import get from "axios";
-
+import Loader from './Loader';
 import Media from 'react-bootstrap/Media';
 import ListGroup from 'react-bootstrap/ListGroup';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -38,7 +38,7 @@ function JobList(props) {
 	    dataLength={items.length}
 	    next={next_fn}
 	    hasMore={hasMore}
-	    loader={<h4>Loading...</h4>}
+	    loader={<Loader/>}
 	    endMessage={
 		<p style={{ textAlign: 'center' }}>
 		<b>Yay! You have seen it all</b></p>}>

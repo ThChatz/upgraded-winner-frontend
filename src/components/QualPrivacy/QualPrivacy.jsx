@@ -3,7 +3,7 @@ import get from "axios";
 
 import Media from 'react-bootstrap/Media';
 import Button from 'react-bootstrap/Button';
-
+import Loader from '..Loader/';
 import ListGroup from 'react-bootstrap/ListGroup';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Form from 'react-bootstrap/Form';
@@ -52,7 +52,7 @@ function QualPrivacy(props) {
 				dataLength={items.length}
 				next={next_fn}
 				hasMore={hasMore}
-				loader={<h4>Loading...</h4>}
+				loader={<Loader/>}
 				endMessage={
 					<p style={{ textAlign: 'center' }}>
 						<b>Yay! You have seen it all</b></p>}>

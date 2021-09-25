@@ -6,11 +6,12 @@ import DynamicInput from "../DynamicInput";
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import QualPrivacy from '../QualPrivacy/QualPrivacy';
-
+import loading from "../Loader";
+import Spinner from 'react-bootstrap/Spinner'
 function UpdateProfile() {
 
     return (
-
+        <>
         <Form>
             <Tabs defaultActiveKey="Personal" className="mb-3">
                 <Tab eventKey="Personal" title="Personal">
@@ -129,7 +130,8 @@ function UpdateProfile() {
                 </Tab>
             </Tabs>
         </Form>
-
+        
+        </>
     );
 }
 

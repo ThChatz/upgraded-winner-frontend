@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 import InfiniteScroll from 'react-infinite-scroll-component';
-
+import Loader from '../Loader';
 
 const UserListItem = (props) =>
 <a href={"#/Users/"+(props.threadId === undefined ? 
@@ -48,7 +48,7 @@ function UserList(props) {
 	    dataLength={items.length}
 	    next={next_fn}
 	    hasMore={hasMore}
-	    loader={<h4>Loading...</h4>}
+	    loader={<Loader />}
 	    endMessage={
 		<p style={{ textAlign: 'center' }}>
 		<b>Yay! You have seen it all</b></p>}>
