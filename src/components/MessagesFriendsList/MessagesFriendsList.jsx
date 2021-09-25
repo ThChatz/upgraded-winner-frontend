@@ -9,16 +9,17 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 const FriendListItem = (props) =>
-<a href={"#/Conversations/"+(props.threadId === undefined ? 
-						"no_thread" : props.threadId)}>
-<Media>
-    <img src={props.profilePic} alt={props.profileName}/>
-    <Media.Body>
-	<h5>{props.profileName}</h5>
-	<p>{props.lastMessage}</p>
-    </Media.Body>
-</Media>
-</a>;
+      props.threadId === undefined
+      ? <> </>
+      : <a href={"#/Conversations/"+props.threadId}>
+	    <Media>
+		<img src={props.profilePic} alt={props.profileName}/>
+		<Media.Body>
+		    <h5>{props.profileName}</h5>
+		    <p>{props.lastMessage}</p>
+		</Media.Body>
+	    </Media>
+	</a>;
 
 
 function MessagesFriendList(props) {
@@ -32,7 +33,8 @@ function MessagesFriendList(props) {
 	    .catch(() => {setHasMore(false); return {"data": {"friends": []}}})
 	    .then((response) => response.data.friends)
 	    .then((x) => {setItems(items.concat(x)); return x})
-	    .then((x) => x.length < 20 ? setHasMore(false) : 0);
+	    .then((x) => x.length < 20 ? setHasMore(false) : 0)
+	    .catch((x) => null);
 	setPg(curPg+1);
     }
     
@@ -41,10 +43,10 @@ function MessagesFriendList(props) {
 
     return (
 	<div style={{"overflow": "auto",
-		     "height": "80%",
+		     "minHeight": "calc(100vh - 8rem)",
 		     "display": "flex",
 		     "flexDirection": "column",
-			 "boxSizing": "unset"}}>
+		     "boxSizing": "border-box"}}>
 	<InfiniteScroll
 	    dataLength={items.length}
 	    next={next_fn}
