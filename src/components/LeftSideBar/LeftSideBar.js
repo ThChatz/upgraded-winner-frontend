@@ -4,12 +4,15 @@ import UserRef from "../UserRef/UserRef";
 
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import App from '../../App.js';
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
-import ModalImage from 'react-modal-image';
+
+
+
 function AddJobModal(props) {
 
 	const [show, setShow] = useState(false);
@@ -72,14 +75,15 @@ function AddJobModal(props) {
 
 
 function LeftSideBar(props) {
+    const user = useContext(App.UserContext).user;
     return (
             <Card className = "bg-white shadow rounded  container"
 	style={{"max-width": "18rem", "max-height": "30rem"}}>
-            <Card.Img variant="top" src={props.picture} />
+            <Card.Img variant="top" src={user.picture} />
             <Card.Body>
-	    <Card.Title>{props.first_name + " " + props.last_name + ", " + props.job}</Card.Title>
+	    <Card.Title>{user.first_name + " " + user.last_name + ", " + user.job}</Card.Title>
 	    <Card.Text>
-	    {props.bio}
+	    {user.bio}
 	</Card.Text>
             </Card.Body>
             <ListGroup className="list-group-flush">

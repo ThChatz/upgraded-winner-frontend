@@ -23,16 +23,16 @@ const Post_by_id = (props) => {
     });
 
     get("/"+props.post_id)
-	.catch((_) => post)
 	.then((resp) => resp.data)
-	.then(setPost);
+	.then((data) => setPost(data))
+	.catch(() => alert("An error has occured"));
 
     return Post(post);
 }
 
 
 const Post = (props) => 
-<section>
+<section >
     <div className="cardbox shadow-lg bg-white">
 	<div className="cardbox-heading">
 	    {/* <div className="dropdown float-right">
@@ -56,16 +56,15 @@ const Post = (props) =>
 		    {/* Name */}
 		    <p className="m-0">{UserRef(props)}</p>
 		    {/* Location */}
-		    <small><span><i className="icon ion-md-pin"></i>{props.PostLocation}</span></small>
 		    {/* Time */}
-		    <small><span><i className="icon ion-md-time"></i>{props.PostedAt}</span></small>
+		    <small><span><i className="icon ion-md-time"></i>{props.created_at}</span></small>
 		</div>
 	    </div>
 	</div>
 	{/* Content */}
 	<div className="cardbox-item mx-5">
 	    {("Text" in props) ?
-	     <p>{props.Text}</p> :
+	     <p>{props.content}</p> :
 	     ("Image" in props) ?
 	     <p>{props.ProfileName} uploaded an image.</p> :
 	     <></>
@@ -77,7 +76,7 @@ const Post = (props) =>
 	    
 	</div>
 	<div className="cardbox-base">
-	    <ReactButton post_id={props.PostId} />
+	    <ReactButton post_id={props.id} />
 
 	    <ul className="float-right">
 		<li><a><i className="fa fa-comments"></i></a></li>
@@ -107,6 +106,6 @@ const Post = (props) =>
     </div>
 </section>
 
-
+Post.by_id = Post_by_id;
 
 export default Post;

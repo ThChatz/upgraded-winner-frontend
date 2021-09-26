@@ -8,12 +8,14 @@ import UserInfo from "../UserInfo/UserInfo"
 import "./UserRef.css";
 
 function UserRef(props) {
-    const [show, setShow] = useState(false);
+    // const [show, setShow] = [false, (x) => x];
+    const show = false;
+    const setShow = x => x;
     const btn = useRef(null);
 
     return (<div
- 		onMouseOver={() => setShow(true)}
-		onMouseLeave={() => setShow(false)}>
+ 		onmouseover={(e) => setShow(true)}
+		onmouseleave={(e) => setShow(false)}>
 		<Button variant="Link"
 			ref={btn}>
 		    {props.profileName}

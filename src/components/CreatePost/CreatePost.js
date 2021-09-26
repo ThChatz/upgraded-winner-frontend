@@ -6,6 +6,8 @@ import { CameraAlt, VideoCall, CalendarToday, Assignment, Audiotrack} from '@mat
 
 import Form from "react-bootstrap/Form";
 
+import { submitHandler } from "../../submitForm";
+
 const CreatePost = () => {
 
     return (
@@ -13,10 +15,11 @@ const CreatePost = () => {
                         <div className="messageSender">
                             <div className="messageSenderTop">
                                 <Avatar>H</Avatar>
-                                <Form>
+                                <Form onSubmit={submitHandler("post", "/post")}>
                                     <Form.Control
                                         className="messageSenderInput"
                                         placeholder={`What's on your mind?`}
+					name="text"
                                     />
 
                                     <button type="submit"></button>
