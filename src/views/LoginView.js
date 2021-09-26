@@ -1,4 +1,4 @@
-import React, { Component, useContext } from "react";
+import React, { Component, useContext, useState } from "react";
 import '../App.css';
 import App from '../App.js';
 import { submitHandler } from '../submitForm'
@@ -16,6 +16,23 @@ const Login = (props) => {
 	  .then((r) => context.setUser(r.data))
 	  .catch(() => {});
     
+
+      const [validated, setValidated] = useState(false);
+
+      const handleSubmit = (e) => {
+          const form = e.currentTarget;
+          if (form.checkValidity() === false) {
+              e.preventDefault();
+              e.stopPropagation();
+          }
+  
+          setValidated(true);
+      };
+  
+      const submits = (e) => {
+          handleSubmit(e);
+          onSubmit(e);
+      }
     return (
         <div className="auth-wrapper">
             <div className="auth-inner">
@@ -23,13 +40,15 @@ const Login = (props) => {
                     <h3>Sign In [{JSON.stringify(context)}]</h3>
                     <Form.Group>
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email"
+                        <Form.Control required
+                                      type="email"
                                       name="email"
                                       placeholder="Enter Email" />
                         
 
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password"
+                        <Form.Control required
+                                      type="password"
                                       name="password"
                                       placeholder="Enter your password" />
                         <br />
