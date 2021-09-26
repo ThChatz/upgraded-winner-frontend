@@ -4,8 +4,6 @@ import Post from '../Post/Post.js';
 import Spinner from 'react-bootstrap/Spinner';
 import get from "axios";
 import { Container } from 'react-bootstrap';
-import loading from '../Loader.jsx';
-import Loader from '../Loader.jsx';
 
 function Feed(props) {
 
@@ -30,7 +28,7 @@ function Feed(props) {
 			dataLength={items.length}
 			next={next_fn}
 			hasMore={hasMore}
-			loader={<Loader />}
+			loader={<h4>Loading...</h4>}
 			endMessage={
 				< p style={{ textAlign: 'center' }}>
 					<b>Yay! You have seen it all</b></p >}>

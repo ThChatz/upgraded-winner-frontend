@@ -1,4 +1,4 @@
-import React, { Component, useContext } from "react";
+import React, { Component, useContext, useState } from "react";
 import '../App.css';
 import App from '../App.js';
 import { submitHandler } from '../submitForm'
@@ -11,16 +11,28 @@ import Form from "react-bootstrap/Form";
 const Login = (props) => {
     const context = useContext(App.UserContext);
 
-    const onSubmit = (e) => {
-        submitHandler("post", "/session")(e)
-            .then((r) => {
-                console.log(r);
-                context.setUser(r.data);
-                return r;
-            })
-    }
+    const onSubmit = (e) => submitHandler("post", "/session")(e)
+	  .then((r) => {console.log(r); return r})
+	  .then((r) => context.setUser(r.data))
+	  .catch(() => {});
+    
 
+      const [validated, setValidated] = useState(false);
 
+      const handleSubmit = (e) => {
+          const form = e.currentTarget;
+          if (form.checkValidity() === false) {
+              e.preventDefault();
+              e.stopPropagation();
+          }
+  
+          setValidated(true);
+      };
+  
+      const submits = (e) => {
+          handleSubmit(e);
+          onSubmit(e);
+      }
     return (
         <div className="auth-wrapper">
             <div className="auth-inner">
@@ -29,15 +41,17 @@ const Login = (props) => {
                     {/* [{JSON.stringify(context)}] */}
                     <Form.Group>
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email"
-                            name="email"
-                            placeholder="Enter Email" />
-
+                        <Form.Control required
+                                      type="email"
+                                      name="email"
+                                      placeholder="Enter Email" />
+                        
 
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password"
-                            name="password"
-                            placeholder="Enter your password" />
+                        <Form.Control required
+                                      type="password"
+                                      name="password"
+                                      placeholder="Enter your password" />
                         <br />
                         <button type="submit" className="btn btn-primary btn-block">Submit</button>
                         <p >

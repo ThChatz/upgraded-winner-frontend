@@ -34,6 +34,22 @@ const RequireAuth = (props) => {
 	return pageContents;
 }
 
+// const RequireNotAuth = (props) => {
+// 	const [pageContents, setPageContents] = useState(<></>);
+// 	const { user, setUser } = useContext(UserContext);
+
+// 	console.log(user);
+
+// 	useEffect(() =>
+// 		setPageContents((user.id === undefined &&
+// 			(props.admin ||
+// 				!(props.admin && user.is_admin)))
+// 			? props.children : <FeedView />)
+// 		, [user]);
+
+// 	return props.children;
+// }
+
 
 const App = (props) => {
 
@@ -47,9 +63,10 @@ const App = (props) => {
 					<Error {...error} />
 					<HashRouter>
 						<Switch>
-							<Route path="/signup" component={SignUpView} exact />
-							<Route path="/login" component={LoginView} exact />
-
+							{/* <RequireNotAuth> */}
+								<Route path="/signup" component={SignUpView} exact />
+								<Route path="/login" component={LoginView} exact />
+							{/* </RequireNotAuth> */}
 							<RequireAuth>
 								<Route path="/install" component={CreateAdmin} />
 								<Route path="/admin" component={Admin} />
