@@ -39,7 +39,7 @@ const RequireAuth = (props) => {
 const App = (props) => {
 
 	const [error, setError] = useState({})
-	const [user, setUser] = useState({ id: 1 })
+	const [user, setUser] = useState({})
 	const [context, setContext] = useState({
 		error: error,
 		setError: setError,

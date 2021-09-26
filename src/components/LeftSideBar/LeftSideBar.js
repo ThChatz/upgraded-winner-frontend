@@ -18,53 +18,53 @@ function AddJobModal(props) {
 
 	return (
 		<>
-			<Button style={{"padding-left": "0px", "paddint-top": "0px"}} variant="link" onClick={handleShow}>
-				Add Job
-			</Button>
+		<Button style={{"padding-left": "0px", "paddint-top": "0px"}} variant="link" onClick={handleShow}>
+		Add Job
+	    </Button>
 
-			<Modal
-				show={show}
-				onHide={handleClose}
-				backdrop="static"
-				keyboard={false}
-			>
-				<Modal.Header closeButton>
-					<Modal.Title>Add Job</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-
-
-					<Form>
-						<Container>
-							<Row>
-								<Col>
-									<Form.Group className="mb-3" controlId="fullName">
-										<Form.Label>Job Name</Form.Label>
-										<Form.Control type="text" placeholder="Job name" />
-									</Form.Group>
-									<Form.Group className="mb-3" controlId="fullName">
-									<Form.Control
-										as="textarea"
-										placeholder="Job Description"
-										style={{ height: '100px' }}
-									/>
-									</Form.Group>
-								</Col>
+		<Modal
+	    show={show}
+	    onHide={handleClose}
+	    backdrop="static"
+	    keyboard={false}
+		>
+		<Modal.Header closeButton>
+		<Modal.Title>Add Job</Modal.Title>
+		</Modal.Header>
+		<Modal.Body>
 
 
-							</Row>
-						</Container>
-					</Form>
+		<Form>
+		<Container>
+		<Row>
+		<Col>
+		<Form.Group className="mb-3" controlId="fullName">
+		<Form.Label>Job Name</Form.Label>
+		<Form.Control type="text" placeholder="Job name" />
+		</Form.Group>
+		<Form.Group className="mb-3" controlId="fullName">
+		<Form.Control
+	    as="textarea"
+	    placeholder="Job Description"
+	    style={{ height: '100px' }}
+		/>
+		</Form.Group>
+		</Col>
 
 
-				</Modal.Body>
-				<Modal.Footer>
-					<Button variant="secondary" onClick={handleClose}>
-						Close
-					</Button>
-					<Button variant="primary" onClick={handleClose}>Submit</Button>
-				</Modal.Footer>
-			</Modal>
+	    </Row>
+		</Container>
+		</Form>
+
+
+	    </Modal.Body>
+		<Modal.Footer>
+		<Button variant="secondary" onClick={handleClose}>
+		Close
+	    </Button>
+		<Button variant="primary" onClick={handleClose}>Submit</Button>
+		</Modal.Footer>
+		</Modal>
 		</>
 	);
 }
@@ -73,35 +73,35 @@ function AddJobModal(props) {
 
 function LeftSideBar(props) {
     return (
-        <Card className = "bg-white shadow rounded  container"
-	      style={{"max-width": "18rem", "max-height": "30rem"}}>
-            <Card.Img variant="top" src={props.profilePic} />
+            <Card className = "bg-white shadow rounded  container"
+	style={{"max-width": "18rem", "max-height": "30rem"}}>
+            <Card.Img variant="top" src={props.picture} />
             <Card.Body>
-		<Card.Title>{props.profileName}</Card.Title>
-		<Card.Text>
-		    {props.profileBio}
-		</Card.Text>
+	    <Card.Title>{props.first_name + " " + props.last_name + ", " + props.job}</Card.Title>
+	    <Card.Text>
+	    {props.bio}
+	</Card.Text>
             </Card.Body>
             <ListGroup className="list-group-flush">
-		<ListGroup.Item>
-                    <Card.Link>
-			My Connections
-                    </Card.Link>
-		</ListGroup.Item>
-        <ListGroup.Item style = {{"height": "41px", "padding-top": "0px"}}>   
+	    <ListGroup.Item>
+            <Card.Link>
+	    My Connections
+        </Card.Link>
+	    </ListGroup.Item>
+            <ListGroup.Item style = {{"height": "41px", "padding-top": "0px"}}>   
             <AddJobModal/>
-        </ListGroup.Item>   
-    	<ListGroup.Item>    
-                    <Card.Link>
-			My Settings
-                    </Card.Link>
-		</ListGroup.Item>
+            </ListGroup.Item>   
+    	    <ListGroup.Item>    
+            <Card.Link>
+	    My Settings
+        </Card.Link>
+	    </ListGroup.Item>
             </ListGroup>
             <Card.Body>
-		<Card.Link href="#">Privacy Policy</Card.Link>
-		<Card.Link href="#">Contact Us</Card.Link>
+	    <Card.Link href="#">Privacy Policy</Card.Link>
+	    <Card.Link href="#">Contact Us</Card.Link>
             </Card.Body>
-        </Card>
+            </Card>
     );
 }
 

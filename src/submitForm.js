@@ -5,8 +5,21 @@ const submitHandler = (method, url, opts={}) =>
 	  event.preventDefault();
 	  const formData = new FormData(event.currentTarget);
 	  const entries = {};
+	  let typed_re = /(bool|int)\(([a-zA-Z\-_]+)\)/;
+	  let untyped_re = /[a-zA-Z\-_]+/;
 	  for (let [k, v] of formData.entries()) {
-	      entries[k] = v;
+	      var typed_match = k.match(typed_re);
+	      var untyped_match = k.match(untyped_re);
+	      
+	      if(typed_match != null) {
+		  if(typed_match[1] === "int") {
+		      entries[typed_match[2]] = parseInt(v);
+		  } else if(typed_match[1] === "bool") {
+		      entries[typed_match[2]] = !(v === "false");
+		  }
+	      } else if(untyped_match != null) {
+		  entries[k] = v;
+	      }
 	  }
 	  console.log(entries)
 	  return requestWithCsrf(method, url, opts)(entries)

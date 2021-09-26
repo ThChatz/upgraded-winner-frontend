@@ -14,7 +14,7 @@ const QualItem = (props) =>
 		<Col>
 			<h5>{props.profileName}</h5>
 		</Col>
-		<Col className="d-flex justify-content-end">
+		<Col className="d-flex justify-content-around">
 			<Form.Check type="checkbox" />
 		</Col>
 	</Row>
@@ -57,7 +57,16 @@ function QualPrivacy(props) {
 					<p style={{ textAlign: 'center' }}>
 						<b>Yay! You have seen it all</b></p>}>
 				<ListGroup>
-					{[...props.children, ...items.map((i) => <ListGroup.Item>
+				    {[...props.children,
+				      <Row style={{maxWidth: "100%"}}>
+					  <Col>
+					      <h5>Qualifications</h5>
+					  </Col>
+					  <Col className="d-flex justify-content-around">
+					      <h5>Privacy</h5>
+					  </Col>
+				      </Row>,
+				      ...items.map((i) => <ListGroup.Item>
 						<QualItem {...i} />
 
 					</ListGroup.Item>)]}
