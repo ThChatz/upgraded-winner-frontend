@@ -14,16 +14,15 @@ import Error from './components/error.jsx';
 import Admin from './views/Admin';
 import DynamicInput from './components/DynamicInput';
 import get from 'axios';
+import WelcomePage from './views/WelcomePageView';
 
 const UserContext = createContext({ 'user': {}, 'setUser': () => { } });
 const ErrorContext = createContext({ 'error': {}, 'setError': () => { } });
 
 
 const RequireAuth = (props) => {
-	const [pageContents, setPageContents] = useState(<></>);
+	const [pageContents, setPageContents] = useState(<WelcomePageView />);
 	const { user, setUser } = useContext(UserContext);
-
-	console.log(user);
 
 	useEffect(() =>
 		setPageContents((user.id !== undefined &&
@@ -32,7 +31,7 @@ const RequireAuth = (props) => {
 			? props.children : <WelcomePageView />)
 		, [user]);
 
-	return props.children;
+	return pageContents;
 }
 
 
@@ -40,13 +39,6 @@ const App = (props) => {
 
 	const [error, setError] = useState({})
 	const [user, setUser] = useState({})
-	const [context, setContext] = useState({
-		error: error,
-		setError: setError,
-		user: user,
-		setUser: setUser
-	});
-
 
 	return (
 		<>

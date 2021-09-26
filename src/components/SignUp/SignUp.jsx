@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import App from '../../App';
 import { submitHandler, submitHandlerMultipart } from "../../submitForm";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -17,14 +18,14 @@ const Personal = (props) =>
         <Form.Label>First Name</Form.Label>
         <Form.Control type="text" placeholder="Enter Full Name"
 		      form="signUpForm"
-		      name="first-name"/>
+		      name="first_name"/>
     </Form.Group>
 
     <Form.Group className="mb-3" controlId="formGroupEmail">
         <Form.Label>Last Name</Form.Label>
         <Form.Control type="text" placeholder="Enter Last Name"
 		      form="signUpForm"
-		      name="last-name"/>
+		      name="last_name"/>
     </Form.Group>
 
 
@@ -78,11 +79,11 @@ const Map = (props) =>
 
 const Privacy = (props) =>
 <>
-    {[<PrivacySelector header="Email" name="email-private" />,
-      <PrivacySelector header="Phone" name="phone-private" />,
-      <PrivacySelector header="Bio" name="bio-private" />,
-      <PrivacySelector header="Network" name="network-private" />,
-      <PrivacySelector header="Job" name="job-private" />]
+    {[<PrivacySelector header="Email" name="email_private" />,
+      <PrivacySelector header="Phone" name="phone_private" />,
+      <PrivacySelector header="Bio" name="bio_private" />,
+      <PrivacySelector header="Network" name="network_private" />,
+      <PrivacySelector header="Job" name="job_private" />]
      .map((comp) =>
 	 <Row style={{"padding-bottom": 15, maxWidth: "100%"}}>
 	     {comp}
@@ -133,9 +134,13 @@ const ProfilePic = (props) => {
     const [hasUploaded, setHasUploaded] = useState(false);
     const [hiddenValue, setHiddenValue] = useState(-1);
 
-    const pic_upload_fn = (e) =>
-	  submitHandlerMultipart("post", "/media/image")(e)
-	  .then((resp) => setHiddenValue(resp.data.id));
+	const setError = useContext(App.ErrorContext).setError;
+
+    const pic_upload_fn = submitHandlerMultipart("post", "/media/image", 
+	{then: (resp) => {
+		setHiddenValue(resp.data.id);
+		window.location="#"},
+	catch: (resp) => setError(resp.data)});
 
     return <ProfilePic_ onChange={(ev) => {setPic(URL.createObjectURL(ev.target.files[0]));
 					  setHasUploaded(false)}}

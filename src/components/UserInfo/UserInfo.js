@@ -26,10 +26,10 @@ const UInfoBtn = (props) =>
 
 const UserInfo = (props) =>
 <Card>
-    <Card.Img variant="top" src={props.profilePic} />
+    <Card.Img variant="top" src={props.picture} />
     <Card.Body>
-	<Card.Title>{props.profileName}</Card.Title>
-	<Card.Text>{props.profileJob}</Card.Text>
+	<Card.Title>{props.first_name + " " + props.last_name}</Card.Title>
+	<Card.Text>{props.job}</Card.Text>
     <UInfoBtn id={props.id} connected={props.connected} />
     </Card.Body>
 </Card>;

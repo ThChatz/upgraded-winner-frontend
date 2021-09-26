@@ -14,11 +14,11 @@ function UserRef(props) {
     const btn = useRef(null);
 
     return (<div
- 		onmouseover={(e) => setShow(true)}
-		onmouseleave={(e) => setShow(false)}>
+ 		onMouseOver={(e) => setShow(true)}
+		onMouseLeave={(e) => setShow(false)}>
 		<Button variant="Link"
 			ref={btn}>
-		    {props.profileName}
+		    {props.first_name + " " + props.last_name}
 		</Button>
 		<Overlay show={show} target={btn}>
 		    <Popover>

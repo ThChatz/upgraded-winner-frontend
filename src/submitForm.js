@@ -54,7 +54,7 @@ const requestWithCsrf = (method, url, opts={}) =>
 		       data: {"__anti-forgery-token": tok, ...body},
 		       withCredentials: true, ...opts}))
       .then((x) => request(x))
-      .catch((x) => {console.log(x); return x});
+	  
       
 
 export {submitHandler, submitHandlerMultipart, requestWithCsrf}; 

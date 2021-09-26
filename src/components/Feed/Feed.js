@@ -34,7 +34,11 @@ function Feed(props) {
 			endMessage={
 				< p style={{ textAlign: 'center' }}>
 					<b>Yay! You have seen it all</b></p >}>
-		{items.map((props) => <li key={props.id}><Post.by_id post_id={props.id}/></li>)}
+			<ul className="list-unstyled">
+				{items.map((id) => <li key={id}>
+					<Post.by_id post_id={id} />
+				</li>)}
+			</ul>
 		</InfiniteScroll >
 
 

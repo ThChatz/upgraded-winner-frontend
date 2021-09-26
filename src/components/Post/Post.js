@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../CreatePost/CreatePost.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
@@ -22,12 +22,20 @@ const Post_by_id = (props) => {
 	"img": ""
     });
 
-    get("/"+props.post_id)
-	.then((resp) => resp.data)
-	.then((data) => setPost(data))
-	.catch(() => alert("An error has occured"));
+	const [user, setUser] = useState({});
+	useEffect(() =>
+		get("/post/"+props.post_id)
+		.then((resp) => resp.data)
+		.then((data) => {console.log(data); return data})
+		.then((data) => setPost(data))
+		.catch((a) => console.log(a)), [props.post_id])
 
-    return Post(post);
+	useEffect(() =>
+		get("/user/"+post.usr)
+		.then((resp) => setUser(resp.data))
+	, [post.usr])
+
+    return Post({...post, user});
 }
 
 
@@ -35,38 +43,29 @@ const Post = (props) =>
 <section >
     <div className="cardbox shadow-lg bg-white">
 	<div className="cardbox-heading">
-	    {/* <div className="dropdown float-right">
-		<button className="btn btn-flat btn-flat-icon" type="button" data-toggle="dropdown" aria-expanded="false">
-		<em className="fa fa-ellipsis-h"></em>
-		</button>
-		<div className="dropdown-menu dropdown-scale dropdown-menu-right" role="menu" >
-		<a className="dropdown-item" href="#">Hide post</a>
-		<a className="dropdown-item" href="#">Stop following</a>
-		<a className="dropdown-item" href="#">Report</a>
-		</div>
-		</div> */}
+
 	    <div className="media m-0">
 		{/* Avatar */}
 		<div className="d-flex mr-3">
 		    <a href="#">
-			<img src={props.ProfilePic} />
+			<img src={props.user.picture} />
 		    </a>
 		</div>
 		<div className="media-body ">
 		    {/* Name */}
-		    <p className="m-0">{UserRef(props)}</p>
+		    <p className="m-0">{UserRef(props.user)}</p>
 		    {/* Location */}
 		    {/* Time */}
-		    <small><span><i className="icon ion-md-time"></i>{props.created_at}</span></small>
+		    <small><span><i className="icon ion-md-time"></i>{new Date(props.created_at).toString()}</span></small>
 		</div>
 	    </div>
 	</div>
 	{/* Content */}
 	<div className="cardbox-item mx-5">
-	    {("Text" in props) ?
+	    {(content in props) ?
 	     <p>{props.content}</p> :
 	     ("Image" in props) ?
-	     <p>{props.ProfileName} uploaded an image.</p> :
+	     <p>{props.user.first_name + " " + props.user.last_name} uploaded an image.</p> :
 	     <></>
 	    }
 	    {("Image" in props) ?
@@ -80,18 +79,11 @@ const Post = (props) =>
 
 	    <ul className="float-right">
 		<li><a><i className="fa fa-comments"></i></a></li>
-		<li><a><em className="mr-5">12</em></a></li>
-		<li><a><i className="fa fa-share-alt"></i></a></li>
-		<li><a><em className="mr-3">03</em></a></li>
+		<li><a><em className="mr-5">{props.comment_count}</em></a></li>
 	    </ul>
-	    <ul>
-		<li><a><i className="fa fa-thumbs-up"></i></a></li>
-		<li><a href="#"><img src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/users/3.jpeg" className="img-fluid rounded-circle" alt="User" /></a></li>
-		<li><a href="#"><img src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/users/1.jpg" className="img-fluid rounded-circle" alt="User" /></a></li>
-		<li><a href="#"><img src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/users/5.jpg" className="img-fluid rounded-circle" alt="User" /></a></li>
-		<li><a href="#"><img src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/users/2.jpg" className="img-fluid rounded-circle" alt="User" /></a></li>
-		<li><a><span>242 Likes</span></a></li>1
-	    </ul>
+	    
+		<span>Reactions: {props.like_count + ", " + props.dislike_count, props.love_count}</span>
+		<span>Comments: {props.comment_count}</span>
 	</div>
 	<div className="cardbox-comments">
 	    <span className="comment-avatar float-left">
