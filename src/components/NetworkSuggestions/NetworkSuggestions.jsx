@@ -24,7 +24,7 @@ function NetworkSuggestions(props) {
 
 
     const next_fn = function () {
-	get(props.src+'/'+curPg)
+	get(process.env.REACT_APP_API_ROOT+props.src+'/'+curPg)
 	    .catch(() => {setHasMore(false); return {"data": {"suggestions": []}}})
 	    .then((response) => response.data.suggestions)
 	    .then((x) => setItems(items.concat(x)));

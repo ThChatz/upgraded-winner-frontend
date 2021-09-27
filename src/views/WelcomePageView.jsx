@@ -35,7 +35,7 @@ class WelcomePage extends Component {
                             <Login />
                         </Col>
                         <Col>
-                            <Image src="../../../welcome.jpg" fluid />
+                            <Image src={process.env.PUBLIC_URL+"/welcome.jpg"} fluid />
                         </Col>
                     </Row>
                     

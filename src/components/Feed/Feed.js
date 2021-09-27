@@ -13,7 +13,7 @@ function Feed(props) {
 	const [items, setItems] = useState([]);
 
 	const next_fn = function () {
-		get(props.feedSrc + '/' + curPg)
+		get(process.env.REACT_APP_API_ROOT+props.feedSrc + '/' + curPg)
 			.catch(() => { setHasMore(false); return { "data": { "post_ids": [] } } })
 			.then((response) => response.data.post_ids)
 			.then((x) => setItems(items.concat(x)));
