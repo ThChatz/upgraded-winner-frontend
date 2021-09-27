@@ -48,7 +48,7 @@ const submitHandlerMultipart = (method, url) =>
 
 const requestWithCsrf = (method, url, opts={}) =>
       (body) =>
-      get(proces.env.REACT_APP_API_ROOT+"/anti-forgery-token")
+      get(process.env.REACT_APP_API_ROOT+"/anti-forgery-token")
       .then((resp) => resp.data.token)
       .then((tok) => ({ method: method,
 		       url: process.env.REACT_APP_API_ROOT+url,
