@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import UserList from '../components/UserList/UserList';
 import UserData from '../components/UserData/UserData';
 import { useParams } from "react-router-dom"
+import AdminNavBar from '../components/AdminNavBar.jsx';
 
 function Admin() {
 
@@ -25,7 +26,7 @@ function Admin() {
 	return (
 		<>
 			<Col>
-				<NavBar />
+				<AdminNavBar />
 				<Container className="py-5" style={{ "max-width": "100%", "overflow": "auto" }}>
 					<Row>
 						<Col xs={3}>
