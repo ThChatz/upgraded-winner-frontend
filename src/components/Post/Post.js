@@ -49,7 +49,7 @@ const MakeComment = (props) =>
 		<Form>
 			<Form.Control
 				className="messageSenderInput"
-				placeholder={`What's on your mind?`}
+				placeholder={`Comment on this post...`}
 				name="text"
 			/>
 			<button type="submit"></button>
