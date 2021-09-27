@@ -27,6 +27,7 @@ const submitHandler = (method, url, opts={}) =>
 
 const submitHandlerMultipart = (method, url) =>
       (event) => {
+	  console.log(process.env.REACT_APP_API_ROOT);
 	  event.preventDefault();
 	  const formData = new FormData(event.currentTarget);
 	  const entries = {};
@@ -34,10 +35,10 @@ const submitHandlerMultipart = (method, url) =>
 	      entries[k] = v;
 	  }
 	  
-	  return get("/anti-forgery-token")
+	  return get(process.env.REACT_APP_API_ROOT+"/anti-forgery-token")
 	      .then((resp) => resp.data.token)
 	      .then((tok) => request({method: method,
-				     url: url,
+				     url: process.env.REACT_APP_API_ROOT+url,
 				     data: formData,
 				     withCredentials: true,
 				     headers: {"X-CSRF-TOKEN": tok}}))
@@ -47,10 +48,10 @@ const submitHandlerMultipart = (method, url) =>
 
 const requestWithCsrf = (method, url, opts={}) =>
       (body) =>
-      get("/anti-forgery-token")
+      get(proces.env.REACT_APP_API_ROOT+"/anti-forgery-token")
       .then((resp) => resp.data.token)
       .then((tok) => ({ method: method,
-		       url: url,
+		       url: process.env.REACT_APP_API_ROOT+url,
 		       data: {"__anti-forgery-token": tok, ...body},
 		       withCredentials: true, ...opts}))
       .then((x) => request(x))
