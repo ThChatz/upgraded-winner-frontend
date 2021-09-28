@@ -53,11 +53,14 @@ const NotificationsItem = (props) =>
 		</Media>
 	</a>;
 
+function NavNotifications(props) {
+	const ref = useRef();
+	const [show, setShow] = useState(false);
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
 
 
-function NotificationsPopover(props) {
-	
-	const [curPg, setPg] = useState(0);
+		const [curPg, setPg] = useState(0);
 	const [hasMore, setHasMore] = useState(true)
 
 	const [items, setItems] = useState([]);
@@ -72,32 +75,26 @@ function NotificationsPopover(props) {
 
 	useEffect(next_fn, []);
 
-	return (
+	const notifications_popover = (
 		<Popover>
+			<Popover.Content>
 			<FetchScroll
 				inverse={false}
 				mapFn={NotificationsItem}
 				src={props.src}/>
+			</Popover.Content>
 			{/* ... */}
 		</Popover>
-	);
-
-}
-
-
-function NavNotifications() {
-	const ref = useRef();
-	const [show, setShow] = useState(false);
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
-
+		
+		);
+	
 	return (
 
 
 		<OverlayTrigger
 			placement="bottom"
 			trigger="click"
-			overlay={NotificationsPopover}
+			overlay={notifications_popover}
 			rootClose>
 			<Nav.Link className="nav-item text-center">
 				<BsFillBellFill size="30" title="Notifications" /><br />
