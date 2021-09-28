@@ -16,79 +16,63 @@ import DynamicInput from './components/DynamicInput';
 import get from 'axios';
 import WelcomePage from './views/WelcomePageView';
 
+
+
 const UserContext = createContext({ 'user': {}, 'setUser': () => { } });
 const ErrorContext = createContext({ 'error': {}, 'setError': () => { } });
 
 
 const RequireAuth = (props) => {
-	const [pageContents, setPageContents] = useState(<WelcomePageView />);
-	const { user, setUser } = useContext(UserContext);
+    const [pageContents, setPageContents] = useState(<WelcomePageView />);
+    const { user, setUser } = useContext(UserContext);
 
-	useEffect(() =>
-		setPageContents((user.id !== undefined &&
-			(!props.admin ||
-				(props.admin && user.is_admin)))
-			? props.children : <WelcomePageView />)
-		, [user]);
+    useEffect(() =>
+	setPageContents(props.userPred(user) ? props.children : <WelcomePageView />)
+	, [user]);
 
-	return pageContents;
+    return pageContents;
 }
-
-// const RequireNotAuth = (props) => {
-// 	const [pageContents, setPageContents] = useState(<></>);
-// 	const { user, setUser } = useContext(UserContext);
-
-// 	console.log(user);
-
-// 	useEffect(() =>
-// 		setPageContents((user.id === undefined &&
-// 			(props.admin ||
-// 				!(props.admin && user.is_admin)))
-// 			? props.children : <FeedView />)
-// 		, [user]);
-
-// 	return props.children;
-// }
 
 
 const App = (props) => {
 
-	const [error, setError] = useState({})
-	const [user, setUser] = useState({})
+    const [error, setError] = useState({})
+    const [user, setUser] = useState({})
 
-	return (
-		<>
-			<UserContext.Provider value={{ 'user': user, 'setUser': setUser }}>
-				<ErrorContext.Provider value={{ 'error': error, 'setError': setError }}>
-					<Error {...error} />
-					<HashRouter>
-						<Switch>
-							{/* <RequireNotAuth> */}
-								<Route path="/signup" component={SignUpView} exact />
-								<Route path="/login" component={LoginView} exact />
-							{/* </RequireNotAuth> */}
-							<RequireAuth>
-								<Route path="/install" component={CreateAdmin} />
-								<Route path="/admin" component={Admin} />
-								<Route path="/" component={FeedView} exact />
-								<Route path="/home" component={FeedView} exact />
-								<Route path="/u/:user_id/" exact>
-									<ProfileView />
-								</Route>
-								<Route path="/network" component={NetworkView} exact />
-								<Route path="/jobs" component={JobView} exact />
-								<Route path="/conversations/:thread_id" component={MessagesView} exact />
-								<Route path="/conversations/" component={MessagesView} exact />
-							</RequireAuth>
+    return (
+	<>
+	    <UserContext.Provider value={{ 'user': user, 'setUser': setUser }}>
+		<Error {...error} />
+		<HashRouter>
+		    <Switch>
+			{/* <RequireNotAuth> */}
+			<RequireAuth userPred={(user) => user === {}}>
+			    <Route path="/signup" component={SignUpView} exact />
+			    <Route path="/login" component={LoginView} exact />
+			</RequireAuth>
+			{/* </RequireNotAuth> */}
+			<RequireAuth userPred={(user) => user.is_admin}>
+			    <Route path="/install" component={CreateAdmin} />
+			    <Route path="/admin" component={Admin} />
+			</RequireAuth>
+			<RequireAuth userPred={(user) => user.id !== undefined}>
+			    <Route path="/" component={FeedView} exact />
+			    <Route path="/home" component={FeedView} exact />
+			    <Route path="/u/:user_id/" exact>
+				<ProfileView />
+			    </Route>
+			    <Route path="/network" component={NetworkView} exact />
+			    <Route path="/jobs" component={JobView} exact />
+			    <Route path="/conversations/:thread_id" component={MessagesView} exact />
+			    <Route path="/conversations/" component={MessagesView} exact />
+			</RequireAuth>
 
-						</Switch>
-					</HashRouter>
-				</ErrorContext.Provider>
-			</UserContext.Provider>
-		</>);
+		    </Switch>
+		</HashRouter>
+	    </UserContext.Provider>
+	</>);
 }
 
 App.UserContext = UserContext;
-App.ErrorContext = ErrorContext;
 export default App;
 

@@ -4,49 +4,54 @@ import Form from "react-bootstrap/Form";
 import { AiOutlineArrowUp } from "react-icons/ai"
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Tab from "react-bootstrap/Tab";
+
+import SignUp from "../components/SignUp/SignUp"
+
 export default class CreateAdmin extends Component {
     render() {
-        const onSubmit = submitHandler("post", "/user");
+        const onSubmit = submitHandler("post", "/install");
 
         return (
             <div className="auth-wrapper">
                 <div className="auth-inner">
                     <Container style={{
-                        "height": "48px",
-                        "width": "155px"
-                    }}>
+				   "height": "48px",
+				   "width": "155px"
+			       }}>
                         <AiOutlineArrowUp style={{ "float": "left" }} size="50" />
                         <b>Upgraded<br />Winner</b>
+
                     </Container>
-                    <br/>
-                    <Form onSubmit={onSubmit}>
-                        <h3>Create Admin</h3>
+		    <br />
+		    <h3>Admin Account Information</h3>
+			<SignUp target="/install">
+			    <Tab title="Personal" eventKey="Personal">
+				<SignUp.Personal />
+			    </Tab>
+			    <Tab title="Bio" eventKey="Bio">
+				<SignUp.Bio />
+			    </Tab>
+			    <Tab title="Privacy" eventKey="Privacy">
+				<SignUp.Privacy />
+			    </Tab>
+			    <Tab title="Password" eventKey="Password">
+				<SignUp.Password />
+			    </Tab>
+			    <Tab title="Picture" eventKey="ProfilePic">
+				<SignUp.ProfilePic />
+			    </Tab>
 
-                        <Form.Group>
-                            <Form.Label>Username</Form.Label>
-                            <Form.Control type="text"
-                                name="username"
-                                placeholder="admin" />
-
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email"
-                                name="email"
-                                placeholder="Enter email" />
-
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password"
-                                name="password"
-                                placeholder="Enter your password" />
-                            <Form.Label>Confirm password</Form.Label>
-                            <Form.Control type="password"
-                                placeholder="Retype your password" />
-                            
-                        </Form.Group>
-
+			</SignUp>
 
                         <br />
-                        <button type="submit" className="btn btn-primary btn-block">Install</button>
-                    </Form>
+			<div className="d-flex justify-content-around">
+                            <Button type="submit"
+				    variant="primary">
+				Finish
+			    </Button>
+			</div>
                 </div>
             </div>
         );

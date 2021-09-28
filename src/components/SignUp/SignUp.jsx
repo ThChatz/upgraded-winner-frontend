@@ -190,7 +190,7 @@ const SignUp = (props) => {
     const onSubmit = (e) => {
 	e.preventDefault();
 	validate(e);
-	submitHandler("post", "/user")(e);
+	submitHandler("post", props.action)(e);
     };
 
 
