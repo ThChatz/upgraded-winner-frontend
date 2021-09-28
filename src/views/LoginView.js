@@ -13,7 +13,7 @@ const Login = (props) => {
 
     const onSubmit = (e) => submitHandler("post", "/session")(e)
 	  .then((r) => {console.log(r); return r})
-	  .then((r) => context.setUser(r.data))
+	  .then((r) => context.setUser(r.data.user))
 	  .catch(() => {});
     
 
