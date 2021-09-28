@@ -27,14 +27,14 @@ const Post_by_id = (props) => {
 
 	const [user, setUser] = useState({});
 	useEffect(() =>
-		get("/post/" + props.post_id)
+		get(process.env.REACT_APP_API_ROOT + "/post/" + props.post_id)
 			.then((resp) => resp.data)
 			.then((data) => { console.log(data); return data })
 			.then((data) => setPost(data))
 			.catch((a) => console.log(a)), [props.post_id])
 
 	useEffect(() =>
-		get("/user/" + post.usr)
+		get(process.env.REACT_APP_API_ROOT + "/user/" + post.usr)
 			.then((resp) => setUser(resp.data))
 		, [post.usr])
 
