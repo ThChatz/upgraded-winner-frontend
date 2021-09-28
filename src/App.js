@@ -45,7 +45,8 @@ const App = (props) => {
 
     useEffect(() =>
 	get(process.env.REACT_APP_API_ROOT+"/session")
-	    .then((resp) => setUser(resp.data)), [])
+	    .then((resp) => setUser(resp.data))
+	    .catch(() => {}), [])
 
     useEffect(() => {
 	if("id" in user && !user.is_admin) {

@@ -130,7 +130,7 @@ function NavAccount() {
 				<br />
 				<Nav.Link href="#settings">Settings and Privacy </Nav.Link>
 				<Nav.Link href="#help">Help </Nav.Link>
-				<Button onClick={onClick} variant="link"> Sign Out </Button>
+			    <Button onClick={() => onClick()} variant="link"> Sign Out </Button>
 			</Popover.Content>
 		</Popover>
 	);

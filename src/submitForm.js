@@ -52,8 +52,10 @@ const requestWithCsrf = (method, url, opts={}) =>
       .then((resp) => resp.data.token)
       .then((tok) => ({ method: method,
 		       url: process.env.REACT_APP_API_ROOT+url,
-		       data: {"__anti-forgery-token": tok, ...body},
-		       withCredentials: true, ...opts}))
+		       data: body,
+		       withCredentials: true,
+		       headers: {"X-CSRF-TOKEN": tok},
+		       ...opts}))
       .then((x) => request(x))
 	  
       
