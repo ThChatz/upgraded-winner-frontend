@@ -4,51 +4,45 @@ import Loader from './Loader';
 import Media from 'react-bootstrap/Media';
 import ListGroup from 'react-bootstrap/ListGroup';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import FetchScroll from './FetchScroll/FetchScroll';
 
 const JobListItem = (props) =>
-<Media>
-    <img src={props.companyLogo} />
-    <Media.Body>
-	<h5>{props.companyName}</h5>
-	<p>{props.jobDescription}</p>
-    </Media.Body>
-</Media>;
+	<Media>
+		<img src={props.companyLogo} />
+		<Media.Body>
+			<h5>{props.companyName}</h5>
+			<p>{props.jobDescription}</p>
+		</Media.Body>
+	</Media>;
 
 
 function JobList(props) {
-    const [curPg, setPg] = useState(0);
-    const [hasMore, setHasMore] = useState(true)
+	const [curPg, setPg] = useState(0);
+	const [hasMore, setHasMore] = useState(true)
 
-    const [items, setItems] = useState([]);
+	const [items, setItems] = useState([]);
 
-    const next_fn = function () {
-	get(process.env.REACT_APP_API_ROOT+props.src+'/'+curPg)
-	    .catch(() => {setHasMore(false); return {"data": {"jobs": []}}})
-	    .then((response) => response.data.jobs)
-	    .then((x) => {setItems(items.concat(x)); return x})
-	    .then((x) => x.length < 20 ? setHasMore(false) : 0);
-	setPg(curPg+1);
-    }
-    
+	const next_fn = function () {
+		get(process.env.REACT_APP_API_ROOT + props.src + '/' + curPg)
+			.catch(() => { setHasMore(false); return { "data": { "jobs": [] } } })
+			.then((response) => response.data.jobs)
+			.then((x) => { setItems(items.concat(x)); return x })
+			.then((x) => x.length < 20 ? setHasMore(false) : 0);
+		setPg(curPg + 1);
+	}
 
-    useEffect(next_fn, []);
 
-    return (
-	<InfiniteScroll
-	    dataLength={items.length}
-	    next={next_fn}
-	    hasMore={hasMore}
-	    loader={<h4>Loading</h4>}
-	    endMessage={
-		<p style={{ textAlign: 'center' }}>
-		<b>Yay! You have seen it all</b></p>}>
-	    <ListGroup>
-		{items.map((i) => <ListGroup.Item>
-				     <JobListItem {...i} />
-				 </ListGroup.Item>)}
-	    </ListGroup>
-	</InfiniteScroll>
-    );
+	useEffect(next_fn, []);
+
+	return (
+		<FetchScroll
+			inverse={false}
+			wrapFn={(items) => <ListGroup>{items}</ListGroup>}
+			mapFn={(item) =>
+				<ListGroup.Item key={item.id} >
+					<JobListItem {...item} />
+				</ListGroup.Item>} />
+	);
 
 }
 
