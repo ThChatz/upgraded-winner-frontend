@@ -127,13 +127,13 @@ function NavAccount() {
 	const popover = (
 		<Popover>
 			<Popover.Title as="h3">
-				<Nav.Link href="/#/profile"> HackerMan </Nav.Link>
+				<Nav.Link href="/#/u/my-account"> HackerMan </Nav.Link>
 			</Popover.Title>
 			<Popover.Content>
 				<strong>Account</strong>
 				<br />
-				<Nav.Link href="/settings">Settings and Privacy </Nav.Link>
-				<Nav.Link href="/help">Help </Nav.Link>
+				<Nav.Link href="#settings">Settings and Privacy </Nav.Link>
+				<Nav.Link href="#help">Help </Nav.Link>
 				<Button onClick={onClick} variant="link"> Sign Out </Button>
 			</Popover.Content>
 		</Popover>
