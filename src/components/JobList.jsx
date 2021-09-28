@@ -3,7 +3,6 @@ import get from "axios";
 import Loader from './Loader';
 import Media from 'react-bootstrap/Media';
 import ListGroup from 'react-bootstrap/ListGroup';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import FetchScroll from './FetchScroll/FetchScroll';
 
 const JobListItem = (props) =>

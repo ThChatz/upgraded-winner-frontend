@@ -5,7 +5,6 @@ import Nav from 'react-bootstrap/Nav';
 import Popover from 'react-bootstrap/Popover';
 import Button from 'react-bootstrap/Button'
 import Media from 'react-bootstrap/Media';
-//import Col from 'react-bootstrap/Col'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import SearchField from "react-search-field";
 import { BsFillHouseDoorFill, BsPeopleFill, BsBriefcaseFill, BsFillCursorFill, BsFillBellFill, BsPeopleCircle } from "react-icons/bs";

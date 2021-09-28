@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, createContext, useDeepCompareEffect } from 'react';
+import React, { useState, useEffect, createContext} from 'react';
 import './App.css';
 import FeedView from "./views/FeedView"
 import ProfileView from "./views/ProfileView"
@@ -12,10 +12,7 @@ import WelcomePageView from './views/WelcomePageView';
 import CreateAdmin from './views/CreateAdmin';
 import Error from './components/error.jsx';
 import Admin from './views/Admin';
-import DynamicInput from './components/DynamicInput';
 import get from 'axios';
-import WelcomePage from './views/WelcomePageView';
-
 
 
 const UserContext = createContext({ 'user': {}, 'setUser': () => { } });
