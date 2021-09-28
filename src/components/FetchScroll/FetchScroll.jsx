@@ -57,6 +57,8 @@ function FetchScroll(props) {
 		return () => clearInterval(interval);
 	}, []);
 
+	const wrapFn = props.wrapFn === undefined ? x => x : props.wrapFn;
+
 	return (
 			<div {...props}>
 				<InfiniteScroll
@@ -71,7 +73,7 @@ function FetchScroll(props) {
 					endMessage={
 						<p style={{ textAlign: 'center' }}>
 							<b>Yay! You have seen it all</b></p>}>
-					{items.map(props.mapFn)}
+					{wrapFn(items.map(props.mapFn))}
 				</InfiniteScroll>
 			</div>
 	);
