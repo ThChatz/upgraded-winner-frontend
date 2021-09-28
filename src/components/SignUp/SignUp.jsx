@@ -13,7 +13,7 @@ import QualPrivacy from "../QualPrivacy/QualPrivacy";
 
 const Personal = (props) =>
 <Container>
-    <Form.Group className="mb-3" controlId="formGroupEmail">
+    <Form.Group className="mb-3" controlId="formGroupName">
 	<Form.Label>First Name</Form.Label>
 	<Form.Control type="text" placeholder="Enter Full Name"
 		      form="signUpForm"
@@ -21,7 +21,7 @@ const Personal = (props) =>
 		      required />
     </Form.Group>
 
-    <Form.Group className="mb-3" controlId="formGroupEmail">
+    <Form.Group className="mb-3" controlId="formGroupSurname">
 	<Form.Label>Last Name</Form.Label>
 	<Form.Control type="text" placeholder="Enter Last Name"
 		      form="signUpForm"

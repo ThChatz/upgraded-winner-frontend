@@ -19,16 +19,16 @@ const Footer = () => <footer className="page-footer font-small blue pt-4" style 
             <div className="col-md-3 mb-md-0 mb-3">
                 <h5 className="text-uppercase">General</h5>
                 <ul className="list-unstyled">
-                    <li><a href="#!">Sign Up</a></li>
-                    <li><a href="#!">Sign In</a></li>
+                    <li><a href="#signup">Sign Up</a></li>
+                    <li><a href="#login">Sign In</a></li>
                 </ul>
             </div>
 
             <div className="col-md-3 mb-md-0 mb-3">
                 <h5 className="text-uppercase">Browse</h5>
                 <ul className="list-unstyled">
-                    <li><a href="#!">Feed</a></li>
-                    <li><a href="#!">Jobs</a></li>
+                    <li><a href="#Home">Feed</a></li>
+                    <li><a href="#Jobs">Jobs</a></li>
                 </ul>
             </div>
         </div>

@@ -18,7 +18,7 @@ function UpdateProfile() {
                     <Container>
                         <Row>
                             <Col>
-                                <Form.Group className="mb-3" controlId="formGroupEmail">
+                                <Form.Group className="mb-3" controlId="formGroupName">
                                     <Form.Label>Full Name</Form.Label>
                                     <Form.Control type="email" placeholder="Enter Full Name" />
                                 </Form.Group>
