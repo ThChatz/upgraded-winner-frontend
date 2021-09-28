@@ -11,7 +11,10 @@ import SignUp from "../components/SignUp/SignUp"
 
 export default class CreateAdmin extends Component {
     render() {
-        const onSubmit = submitHandler("post", "/install");
+        const onSubmit = (e) => {
+	    submitHandler("post", "/install")(e)
+		.then(() => location.reload())
+	};
 
         return (
             <div className="auth-wrapper">
@@ -26,32 +29,32 @@ export default class CreateAdmin extends Component {
                     </Container>
 		    <br />
 		    <h3>Admin Account Information</h3>
-			<SignUp target="/install">
-			    <Tab title="Personal" eventKey="Personal">
-				<SignUp.Personal />
-			    </Tab>
-			    <Tab title="Bio" eventKey="Bio">
-				<SignUp.Bio />
-			    </Tab>
-			    <Tab title="Privacy" eventKey="Privacy">
-				<SignUp.Privacy />
-			    </Tab>
-			    <Tab title="Password" eventKey="Password">
-				<SignUp.Password />
-			    </Tab>
-			    <Tab title="Picture" eventKey="ProfilePic">
-				<SignUp.ProfilePic />
-			    </Tab>
+		    <Form onSubmit={onSubmit}>
+			<Form.Label>Name</Form.Label>
+			<Form.Control type="text"
+				      placeholder="Enter your name"
+				      name="name"
+				      required />
 
-			</SignUp>
+			<Form.Label>Email</Form.Label>
+			<Form.Control type="email"
+				      placeholder="Enter your email address"
+				      name="email"
+				      required />
 
-                        <br />
-			<div className="d-flex justify-content-around">
-                            <Button type="submit"
-				    variant="primary">
-				Finish
-			    </Button>
-			</div>
+
+			<Form.Label>Password</Form.Label>
+			<Form.Control type="password"
+				      placeholder="Enter your password"
+				      name="password"
+				      required />
+
+
+                        <Button type="submit"
+				variant="primary">
+			    Finish
+			</Button>
+		    </Form>
                 </div>
             </div>
         );
