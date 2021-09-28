@@ -1,4 +1,4 @@
-import { Component, useState } from 'react';
+import { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 
