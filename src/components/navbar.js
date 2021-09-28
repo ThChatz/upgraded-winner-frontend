@@ -123,7 +123,7 @@ function NavAccount() {
 	const popover = (
 		<Popover>
 			<Popover.Title as="h3">
-				<Nav.Link href="/#/u/my-account"> HackerMan </Nav.Link>
+				<Nav.Link href="#/u/my-account"> HackerMan </Nav.Link>
 			</Popover.Title>
 			<Popover.Content>
 				<strong>Account</strong>
