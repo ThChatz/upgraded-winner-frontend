@@ -105,6 +105,8 @@ const Password = (props) =>
 	  <Form.Label>Confirm password</Form.Label>
 	  <Form.Control type="password"
 			placeholder="Retype your password"
+			name="confirm_password"
+			form="signUpForm"
 			required />
       </>
 
@@ -173,24 +175,26 @@ const ProfilePic = (props) => {
 }
 
 const SignUp = (props) => {
-
-    const [validated, setValidated] = useState(false);
-
-    const validate = (e) => {
-        const form = e.currentTarget;
-        if (form.checkValidity() === false) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
+	const [validated, setValidated] = useState(false);
 	
-        setValidated(true);
+    const validate = (e) => {
+		const form = e.currentTarget;
+		const formData = new FormData(form);
+        if (form.checkValidity() === false || formData.get("password") !== formData.get("confirm_password")) {
+			console.log(formData.get("password"));
+			console.log(formData.get("confirm_password"))
+			console.log("Invalid")
+			return false;
+		}
+	
+        return true;
     };
 
 
     const onSubmit = (e) => {
 	e.preventDefault();
-	validate(e);
-	submitHandler("post", "/user")(e);
+	if(validate(e))
+		submitHandler("post", "/user")(e);
     };
 
 
