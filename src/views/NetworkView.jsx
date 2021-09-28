@@ -1,18 +1,15 @@
-import React from 'react';
+import React, { useContext }from 'react';
 import DefaultLayout from "../layouts/DefaultLayout"
 import LeftSideBar from "../components/LeftSideBar/LeftSideBar"
-
+import App from "../App";
 import NetworkSuggestions from '../components/NetworkSuggestions/NetworkSuggestions'
 
 function NetworkView() {
+	const user = useContext(App.UserContext).user;
     return (
 	<DefaultLayout>
 	    <DefaultLayout.LeftSideBar>
-                        <LeftSideBar
-                            profile_pic="my-account/profile-pic.jpg"
-                            username="Hackerman"
-                            bio="I am hack yr comput0r :^(("
-                        />
+                        <LeftSideBar {...user}/>
 	    </DefaultLayout.LeftSideBar>
 	    <DefaultLayout.Content>
 		<NetworkSuggestions src="/network"/>

@@ -1,4 +1,4 @@
-import React, { Component, useState, useRef, useContext } from 'react';
+import React, { Component, useState, useRef, useContext, useEffect } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -12,6 +12,8 @@ import { BsFillHouseDoorFill, BsPeopleFill, BsBriefcaseFill, BsFillCursorFill, B
 import { AiOutlineArrowUp } from "react-icons/ai"
 import { requestWithCsrf } from '../submitForm';
 import App from '../App';
+import get from 'axios';
+import FetchScroll from './FetchScroll/FetchScroll';
 function NavHome() {
 	return (
 		<Nav.Link className="nav-item text-center" href="#Home">
@@ -42,7 +44,7 @@ function NavMessages() {
 
 {/* Notification Link */ }
 const NotificationsItem = (props) =>
-	<a href={"#/"}>
+	<a href={"#"}>
 		<Media>
 			<img src={props.profilePic} alt={props.profileName} />
 			<Media.Body>
@@ -53,22 +55,34 @@ const NotificationsItem = (props) =>
 
 
 
-const notifications_popover = (
-	<Popover>
-		<NotificationsItem
-			profileName="HackerMAn"
-			profilePic="/my-account/profile-pic.jpg"
-			notification="commented on your photo"
-		/>
-		<NotificationsItem
-			profileName="HackerMAn"
-			profilePic="/my-account/profile-pic.jpg"
-			notification="commented on your photo"
-		/>
-		{/* ... */}
-	</Popover>
+function NotificationsPopover(props) {
+	
+	const [curPg, setPg] = useState(0);
+	const [hasMore, setHasMore] = useState(true)
 
-);
+	const [items, setItems] = useState([]);
+
+	const next_fn = function () {
+		get(process.env.REACT_APP_API_ROOT+props.src)
+			.catch(() => { setHasMore(false); return { "data": { "notification_ids": [] } } })
+			.then((response) => response.data.notification_ids)
+			.then((x) => setItems(items.concat(x)));
+	}
+
+
+	useEffect(next_fn, []);
+
+	return (
+		<Popover>
+			<FetchScroll
+				inverse={false}
+				mapFn={NotificationsItem}
+				src={props.src}/>
+			{/* ... */}
+		</Popover>
+	);
+
+}
 
 
 function NavNotifications() {
@@ -76,13 +90,14 @@ function NavNotifications() {
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
+
 	return (
 
 
 		<OverlayTrigger
 			placement="bottom"
 			trigger="click"
-			overlay={notifications_popover}
+			overlay={NotificationsPopover}
 			rootClose>
 			<Nav.Link className="nav-item text-center">
 				<BsFillBellFill size="30" title="Notifications" /><br />
@@ -102,7 +117,7 @@ function NavAccount() {
 	const context = useContext(App.UserContext);
 	const onClick = (e) => requestWithCsrf("delete", "/session")(e)
 		.then((r) => { console.log(r); return r })
-		.then((r) =>  {
+		.then((r) => {
 			context.setUser({})
 			window.location = "#"
 		})
