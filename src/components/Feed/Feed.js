@@ -16,7 +16,8 @@ function Feed(props) {
 		get(process.env.REACT_APP_API_ROOT+props.feedSrc + '/' + curPg)
 			.catch(() => { setHasMore(false); return { "data": { "post_ids": [] } } })
 			.then((response) => response.data.post_ids)
-			.then((x) => setItems(items.concat(x)));
+			.then((x) => setItems(items.concat(x)))
+			.catch(() => {});
 		setPg(curPg + 1);
 	}
 

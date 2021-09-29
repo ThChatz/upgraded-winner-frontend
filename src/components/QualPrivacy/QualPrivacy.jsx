@@ -28,7 +28,8 @@ function QualPrivacy(props) {
 			.catch(() => { setHasMore(false); return { "data": { "friends": [] } } })
 			.then((response) => response.data.friends)
 			.then((x) => { setItems(items.concat(x)); return x })
-			.then((x) => x.length < 20 ? setHasMore(false) : 0);
+			.then((x) => x.length < 20 ? setHasMore(false) : 0)
+			.catch(() => {});
 		setPg(curPg + 1);
 	}
 

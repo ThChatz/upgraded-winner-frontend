@@ -150,7 +150,8 @@ const CreatePost = () => {
     const [hasUploaded, setHasUploaded] = useState(false);
     const video_upload_fn = (e) =>
         submitHandlerMultipart("post", "/media/video")(e)
-            .then((resp) => setvideoHiddenValue(resp.data.id));
+            .then((resp) => setvideoHiddenValue(resp.data.id))
+            .catch(() => {});
 
     const video_handler = (e) => {
         if(hasUploaded === false){
@@ -162,7 +163,8 @@ const CreatePost = () => {
     const [pichiddenValue, setpicHiddenValue] = useState(-1);
     const pic_upload_fn = (e) =>
         submitHandlerMultipart("post", "/media/image")(e)
-            .then((resp) => setpicHiddenValue(resp.data.id));
+            .then((resp) => setpicHiddenValue(resp.data.id))
+            .catch(() => {});
 
     const pic_handler = (e) => {
         if(hasUploaded === false){
@@ -174,7 +176,8 @@ const CreatePost = () => {
     const [audiohiddenValue, setaudioHiddenValue] = useState(-1);
     const audio_upload_fn = (e) =>
         submitHandlerMultipart("post", "/media/audio")(e)
-            .then((resp) => setaudioHiddenValue(resp.data.id));
+            .then((resp) => setaudioHiddenValue(resp.data.id))
+            .catch(() => {});
 
     const audio_handler = (e) => {
         if(hasUploaded === false){

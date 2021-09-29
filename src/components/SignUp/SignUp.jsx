@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { submitHandler, submitHandlerMultipart } from "../../submitForm";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import Tab from "react-bootstrap/Tab";
+import App from '../../App';
 import Tabs from "react-bootstrap/Tabs";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
@@ -175,6 +176,8 @@ const ProfilePic = (props) => {
 }
 
 const SignUp = (props) => {
+	const context = useContext(App.UserContext);
+
 	const [validated, setValidated] = useState(false);
 	
     const validate = (e) => {
@@ -195,6 +198,10 @@ const SignUp = (props) => {
 	e.preventDefault();
 	if(validate(e))
 		submitHandler("post", "/user")(e);
+		submitHandler("post", "/session")(e)
+	  .then((r) => {console.log(r); return r})
+	  .then((r) => context.setUser(r.data.user))
+	  .catch(() => {});
     };
 
 
