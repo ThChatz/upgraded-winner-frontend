@@ -66,9 +66,9 @@ function NavNotifications(props) {
 
 	const next_fn = function () {
 		get(process.env.REACT_APP_API_ROOT+props.src)
-			.catch(() => { setHasMore(false); return { "data": { "notification_ids": [] } } })
 			.then((response) => response.data.notification_ids)
-			.then((x) => setItems(items.concat(x)));
+			.then((x) => setItems(items.concat(x)))
+			.catch(() => {});
 	}
 
 
@@ -123,7 +123,7 @@ function NavAccount() {
 	const popover = (
 		<Popover>
 			<Popover.Title as="h3">
-				<Nav.Link href="#/u/my-account"> HackerMan </Nav.Link>
+				<Nav.Link href={"#/u/" + context.user.id}> {context.user.first_name} </Nav.Link>
 			</Popover.Title>
 			<Popover.Content>
 				<strong>Account</strong>

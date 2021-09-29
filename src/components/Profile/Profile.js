@@ -50,7 +50,7 @@ function Profile(props) {
             <div className="px-4 pt-0 pb-4 bg-dark">
                 <div className="align-items-end profile-header">
                     <div className="mb-5 text-white">
-                        <h4 className="mt-0 mb-0">{props.profileName}</h4>
+                        <h4 className="mt-0 mb-0">{props.first_name + " " + props.last_name}</h4>
                         <p className="small mb-4">
                             <i className="fa fa-map-marker mr-2"></i>
                             {props.job}

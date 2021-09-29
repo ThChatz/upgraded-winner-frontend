@@ -2,7 +2,7 @@ import Overlay from 'react-bootstrap/Overlay';
 import Popover from "react-bootstrap/Popover";
 
 import Button from "react-bootstrap/Button";
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import UserInfo from "../UserInfo/UserInfo"
 import get from 'axios';
 
@@ -19,9 +19,7 @@ function UserRef_from_id({ user_id }) {
 }
 
 function UserRef(props) {
-    // const [show, setShow] = [false, (x) => x];
-    const show = false;
-    const setShow = x => x;
+    const [show, setShow] = useState(false);
     const btn = useRef(null);
 
     return (<div

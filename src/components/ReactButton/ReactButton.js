@@ -9,6 +9,7 @@ import ThumbUpRoundedIcon from '@material-ui/icons/ThumbUpRounded';
 import ThumbDownRoundedIcon from '@material-ui/icons/ThumbDownAltRounded';
 import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
 import { useState, useRef } from 'react'
+import { requestWithCsrf } from '../../submitForm';
 
 import post from "axios";
 
@@ -25,21 +26,29 @@ function ReactButton (props) {
 
     const [show, setShow] = useState(false);
     const self = useRef(null);
-    const [reaction, setReaction_] = useState(0);
-    const reaction_content=["Like", "👍", "👎", "❤️"]
+    const [reaction, setReaction_] = props.reactionState;
+    const reaction_content=
+    {
+        null: "Like",
+        'like': "👍", 
+        'dislike': "👎", 
+        'love': "❤️"
+    }
     const post_id = props.post_id;
 
 
     const setReaction = (reaction) => {
-	post("/actions/react/",
-	     {post: post_id,
-	      reaction: reaction})
-	    .catch(() => console.log("Could not connect to backend."))	
-	    .then(() => setReaction_(reaction));
+        if(reaction === 0) {
+            requestWithCsrf("delete", "/post/"+props.post+"/react")({})
+            .then(() => setReaction_(reaction))
+            .catch(() => {})
+        } else {
+            requestWithCsrf("post", "/post/"+props.post+"/react")({reaction: reaction})
+            .then(() => setReaction_(reaction))
+            .catch(() => {})    
+        }
+	}
 
-    }
-
-    // TODO: send reaction to backend
 
     return (
         <>
@@ -51,13 +60,13 @@ function ReactButton (props) {
                         <Popover
                         onMouseOver={() => setShow(true)}
                         onMouseLeave={() => setShow(false)}>
-                    <ReactionPicker onClick={() => setReaction(1)}>
+                    <ReactionPicker onClick={() => setReaction('like')}>
                         <ThumbUpRoundedIcon/>
                     </ReactionPicker>
-                    <ReactionPicker onClick={() => setReaction(2)}>
+                    <ReactionPicker onClick={() => setReaction('dislike')}>
                         <ThumbDownRoundedIcon/>
                     </ReactionPicker>
-                    <ReactionPicker onClick={() => setReaction(3)}>
+                    <ReactionPicker onClick={() => setReaction('love')}>
                         <FavoriteRoundedIcon/>
                     </ReactionPicker>
                 </Popover>
