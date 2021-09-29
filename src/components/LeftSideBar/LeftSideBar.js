@@ -88,7 +88,7 @@ function LeftSideBar(props) {
             </Card.Body>
             <ListGroup className="list-group-flush">
 	    <ListGroup.Item>
-            <Card.Link>
+            <Card.Link href="#/Network">
 	    My Connections
         </Card.Link>
 	    </ListGroup.Item>

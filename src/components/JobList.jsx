@@ -26,7 +26,8 @@ function JobList(props) {
 			.catch(() => { setHasMore(false); return { "data": { "jobs": [] } } })
 			.then((response) => response.data.jobs)
 			.then((x) => { setItems(items.concat(x)); return x })
-			.then((x) => x.length < 20 ? setHasMore(false) : 0);
+			.then((x) => x.length < 20 ? setHasMore(false) : 0)
+			.catch(() => {});
 		setPg(curPg + 1);
 	}
 
