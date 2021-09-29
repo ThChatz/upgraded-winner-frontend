@@ -53,13 +53,13 @@ function Profile(props) {
                         <h4 className="mt-0 mb-0">{props.profileName}</h4>
                         <p className="small mb-4">
                             <i className="fa fa-map-marker mr-2"></i>
-                            {props.profileLocation}
+                            {props.job}
                         </p>
                     </div>
 
                     <div className="profile mr-3 ">
                         
-                        <OpenPhoto profilePic = {props.profilePic}/>
+                        <OpenPhoto profilePic = {props.picture}/>
                         {/* <img src={props.profilePic} alt="..." width="130" className="rounded mb-2 img-thumbnail" /> */}
                         <br />
                         <EditProfileModal />

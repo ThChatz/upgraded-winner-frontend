@@ -18,13 +18,7 @@ function ProfileView(props) {
 
     useEffect(() => {
 
-
-	get("/u/my-account")
-	    .catch((x) => {return {"data": {}}})
-	    .then((x) => x.data)
-	    .then((x) => setMyAccount(x));
-
-	get("/u/"+user_id)
+	get(process.env.REACT_APP_API_ROOT+"/user/"+user_id)
 	    .catch((x) => {return {"data": {}}})
 	    .then((x) => x.data)
 	    .then((x) => setViewAccount(x))
@@ -37,7 +31,7 @@ function ProfileView(props) {
     return (
 	<DefaultLayout>
 	    <DefaultLayout.LeftSideBar>
-                <LeftSideBar {...myAccount} />
+                <LeftSideBar />
 	    </DefaultLayout.LeftSideBar>
 	    <DefaultLayout.Content>
 	 	<Profile {...viewAccount}>
