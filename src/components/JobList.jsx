@@ -7,10 +7,10 @@ import FetchScroll from './FetchScroll/FetchScroll';
 
 const JobListItem = (props) =>
 	<Media>
-		<img src={props.companyLogo} />
+		<img src={props.pic} />
 		<Media.Body>
-			<h5>{props.companyName}</h5>
-			<p>{props.jobDescription}</p>
+			<h5>{props.title}</h5>
+			<p>{props.description_short}</p>
 		</Media.Body>
 	</Media>;
 
@@ -22,9 +22,8 @@ function JobList(props) {
 	const [items, setItems] = useState([]);
 
 	const next_fn = function () {
-		get(process.env.REACT_APP_API_ROOT + props.src + '/' + curPg)
-			.catch(() => { setHasMore(false); return { "data": { "jobs": [] } } })
-			.then((response) => response.data.jobs)
+		get(process.env.REACT_APP_API_ROOT + props.src)
+			.then((response) => response.data)
 			.then((x) => { setItems(items.concat(x)); return x })
 			.then((x) => x.length < 20 ? setHasMore(false) : 0)
 			.catch(() => {});
@@ -36,6 +35,7 @@ function JobList(props) {
 
 	return (
 		<FetchScroll
+			src={props.src}
 			inverse={false}
 			wrapFn={(items) => <ListGroup>{items}</ListGroup>}
 			mapFn={(item) =>
