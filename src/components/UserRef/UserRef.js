@@ -16,6 +16,8 @@ function UserRef_from_id({ user_id }) {
 	    .then((resp) => setProps(resp.data))
 	    .catch(() => alert("Invalid user id"))
     }, [])
+
+	return <UserRef {...props} />
 }
 
 function UserRef(props) {
