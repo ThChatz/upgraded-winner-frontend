@@ -12,7 +12,7 @@ function NetworkView() {
                         <LeftSideBar {...user}/>
 	    </DefaultLayout.LeftSideBar>
 	    <DefaultLayout.Content>
-		<NetworkSuggestions src="/network"/>
+		<NetworkSuggestions src="/connections"/>
 	    </DefaultLayout.Content>
 	    
 	</DefaultLayout>);

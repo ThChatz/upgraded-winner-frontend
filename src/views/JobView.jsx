@@ -9,11 +9,7 @@ function JobView() {
 	return (
 		<TwoColLayout>
 			<TwoColLayout.LeftSideBar>
-				<LeftSideBar
-					profilePic="my-account/profile-pic.jpg"
-					profileName="Hackerman"
-					bio="I am hack yr comput0r :^(("
-				/>
+				<LeftSideBar/>
 			</TwoColLayout.LeftSideBar>
 			<TwoColLayout.Content>
 				<JobList src="/jobs" />

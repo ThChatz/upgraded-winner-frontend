@@ -1,12 +1,8 @@
 import React, { useState, useContext } from 'react';
 import './CreatePost.css'
-import { Avatar } from '@material-ui/core'
 import { CameraAlt, VideoCall, CalendarToday, Assignment, Audiotrack } from '@material-ui/icons'
 import Form from "react-bootstrap/Form";
 import App from '../../App';
-import { Button } from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal';
-import { Container } from 'react-bootstrap';
 import { submitHandler, submitHandlerMultipart } from "../../submitForm";
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
