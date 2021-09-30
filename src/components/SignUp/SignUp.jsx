@@ -154,8 +154,8 @@ const SignUp = (props) => {
     const onSubmit = (e) => {
 	e.preventDefault();
 	if(validate(e))
-		submitHandler("post", "/user")(e);
-		submitHandler("post", "/session")(e)
+	    submitHandler("post", "/user")(e);
+	submitHandler("post", "/session")(e)
 	  .then((r) => {console.log(r); return r})
 	  .then((r) => context.setUser(r.data.user))
 	  .catch(() => {});

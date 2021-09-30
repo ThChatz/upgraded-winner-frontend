@@ -38,7 +38,7 @@ function ReactButton (props) {
 
 
     const setReaction = (reaction) => {
-        if(reaction === 0) {
+        if(reaction === null) {
             requestWithCsrf("delete", "/post/"+props.post+"/react")({})
             .then(() => setReaction_(reaction))
             .catch(() => {})
@@ -75,7 +75,7 @@ function ReactButton (props) {
                 <Button variant="light"
                     onMouseOver={() => setShow(true)}
                     onMouseLeave={() => setShow(false)}
-			onClick={() => reaction === 0 ? setReaction(1) : setReaction(0)}
+			onClick={() => reaction === null ? setReaction('like') : setReaction(null)}
                     ref={self}>
 
                     {reaction_content[reaction]}

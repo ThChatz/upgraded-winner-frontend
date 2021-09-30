@@ -3,17 +3,17 @@ import get from "axios";
 
 import Media from 'react-bootstrap/Media';
 import Button from 'react-bootstrap/Button';
-
+import { Avatar } from '@material-ui/core';
 import ListGroup from 'react-bootstrap/ListGroup';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Loader from '../Loader';
 
 const FriendListItem = (props) =>
-      props.threadId === undefined
+      props.conversation === undefined
       ? <> </>
-      : <a href={"#/Conversations/"+props.threadId}>
+      : <a href={"#/Conversations/"+props.conversation}>
 	    <Media>
-		<img src={props.profilePic} alt={props.profileName}/>
+		<Avatar>H</Avatar>
 		<Media.Body>
 		    <h5>{props.profileName}</h5>
 		    <p>{props.lastMessage}</p>
@@ -29,8 +29,7 @@ function MessagesFriendList(props) {
 
     const next_fn = function () {
 	get(process.env.REACT_APP_API_ROOT+props.src)
-	    .catch(() => {setHasMore(false); return {"data": {"friends": []}}})
-	    .then((response) => response.data.friends)
+	    .then((response) => response.data)
 	    .then((x) => {setItems(items.concat(x)); return x})
 	    .then((x) => x.length < 20 ? setHasMore(false) : 0)
 	    .catch((x) => null);

@@ -50,7 +50,7 @@ function Conversation(props) {
 			inverse={true}
 			mapFn={Bubble}
 		    src={props.src}/>
-			<MessageForm />
+		<MessageForm src={props.src}/>
 		</div>
 	);
 
