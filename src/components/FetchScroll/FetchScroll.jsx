@@ -19,7 +19,7 @@ function FetchScroll(props) {
 	get(process.env.REACT_APP_API_ROOT+props.src + '?limit=20&before=' + oldestTs,
 	    { withCredentials: true })
 	    .catch(() => { setHasMore(false); return { "data": { "messages": [] } } })
-	    .then((response) => response.data.messages)
+	    .then((response) => response.data)
 	    .then((x) => { setItems(items.concat(x)); return x })
 	    .then((x) => { setOldestTs(items.slice(-1).pop().time); return x })
 	    .then((x) => x.length < 20 ? setHasMore(false) : 0)
