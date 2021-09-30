@@ -10,6 +10,8 @@ import { formHandler, submitHandler } from '../../submitForm';
 import FetchScroll from '../FetchScroll/FetchScroll';
 import get from 'axios';
 
+import ListGroup from 'react-bootstrap/ListGroup';
+
 import "./Conversation.css";
 import axios from 'axios';
 import { BubbleChart } from '@material-ui/icons';
@@ -21,7 +23,8 @@ const MessageForm = (props) =>
 			className="send-message form">
 			<Form.Control type="text"
 				placeholder="Enter your message."
-				className="send-message control" />
+				      className="send-message control"
+			name="message"/>
 			<Form.Text class="rounded" />
 			<Button type='submit' className="send-message submit" />
 		</Form>
@@ -33,26 +36,28 @@ const Bubble = (props) =>
 		<div style={{ ...props.style }}
 			className={props.className + " conv-bubble " +
 				props.color + " " + props.side} {...props}>
-			{props.text !== undefined ? props.text : <> </>}
-			{props.img !== undefined ? props.img : <> </>}
+			{props.message !== undefined ? props.message : <> </>}
 		</div>
 	</div>
 
 
 
 function Conversation(props) {
-	return (
-	    <div style={{minHeight: "100%"}}>
+    return (
+	<>
+	    <div style={{maxHeight: "80vh", 'overflow-y': "scroll"}}>
 		<FetchScroll 
-			className="conv" 
-			id="conv" 
-			InfScrollStyle={{ display: 'flex', flexDirection: 'column-reverse' }}
-			inverse={true}
-			mapFn={Bubble}
+		    className="conv" 
+		    id="conv" 
+		    InfScrollStyle={{ display: 'flex', flexDirection: 'column-reverse' }}
+		    inverse={true}
+		    mapFn={(props) => <ListGroup.Item key={props.time}><Bubble {...props}/></ListGroup.Item>}
+		    wrapFn={(c) => <ListGroup>{c}</ListGroup>}
 		    src={props.src}/>
-		<MessageForm src={props.src}/>
-		</div>
-	);
+	    </div>
+	    <MessageForm src={props.src}/>
+	</>
+    );
 
 }
 

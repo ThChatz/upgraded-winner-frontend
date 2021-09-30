@@ -12,13 +12,14 @@ function FetchScroll(props) {
 
     const [switchSrc, setSwitchSrc] = useState(true);
 
-    const [newestTs, setNewestTs] = useState("");
+    const [newestTs, setNewestTs] = useState(Date.now());
     const [oldestTs, setOldestTs] = useState(Date.now());
 
+    const base_url = process.env.REACT_APP_API_ROOT+props.src;
+
     const next_fn = function () {
-	get(process.env.REACT_APP_API_ROOT+props.src + '?limit=20&before=' + oldestTs,
+	get(base_url + '?limit=20&before=' + oldestTs,
 	    { withCredentials: true })
-	    .catch(() => { setHasMore(false); return { "data": { "messages": [] } } })
 	    .then((response) => response.data)
 	    .then((x) => { setItems(items.concat(x)); return x })
 	    .then((x) => { setOldestTs(items.slice(-1).pop().time); return x })
@@ -28,8 +29,8 @@ function FetchScroll(props) {
 
     const refresh_fn = function () {
 	setItems([]);
-	setOldestTs("");
-	setNewestTs("");
+	setOldestTs(Date.now());
+	setNewestTs(Date.now());
 	setHasMore(true);
 	setSwitchSrc(true);
     }
@@ -43,19 +44,20 @@ function FetchScroll(props) {
 	    next_fn();
 	    setSwitchSrc(false);
 	}
+
     }, [switchSrc, next_fn]);
 
     useEffect(() => {
 	const interval = setInterval(() => {
-	    get(props.src + "?after=" + newestTs)
+	    get(base_url + "?after=" + newestTs)
 		.then((x) => {
-		    setItems([...x.data.messages, ...items]);
-		    setNewestTs(items[0].time)
+		    setItems([...items, ...(x.data.filter((item => item.time >= newestTs)))]);
+		    setNewestTs(Date.now());
 		})
 		.catch(() => { })
 	}, 1000);
 	return () => clearInterval(interval);
-    }, []);
+    }, [items, newestTs]);
 
     const wrapFn = props.wrapFn === undefined ? x => x : props.wrapFn;
 
