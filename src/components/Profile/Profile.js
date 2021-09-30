@@ -62,7 +62,7 @@ function Profile(props) {
     );
     // post/connection/user_id
     const AddButton = () => (
-        <Button onClick={onClick}>
+        <Button onClick={() => onClick()}>
             Add
         </Button>
     );
