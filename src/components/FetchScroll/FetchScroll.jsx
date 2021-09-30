@@ -1,24 +1,29 @@
 import React from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import get from 'axios';
 
 
 function FetchScroll(props) {
+    const bottom = useRef();
+    
     const [hasMore, setHasMore] = useState(true)
 
     const [items, setItems] = useState([]);
 
     const [switchSrc, setSwitchSrc] = useState(true);
 
-    const [newestTs, setNewestTs] = useState("");
+    const [newestTs, setNewestTs] = useState(Date.now());
     const [oldestTs, setOldestTs] = useState(Date.now());
 
+    const [scroll, setScroll] = useState(0);
+
+    const base_url = process.env.REACT_APP_API_ROOT+props.src;
+
     const next_fn = function () {
-	get(process.env.REACT_APP_API_ROOT+props.src + '?limit=20&before=' + oldestTs,
+	get(base_url + '?limit=20&before=' + oldestTs,
 	    { withCredentials: true })
-	    .catch(() => { setHasMore(false); return { "data": { "messages": [] } } })
 	    .then((response) => response.data)
 	    .then((x) => { setItems(items.concat(x)); return x })
 	    .then((x) => { setOldestTs(items.slice(-1).pop().time); return x })
@@ -28,8 +33,8 @@ function FetchScroll(props) {
 
     const refresh_fn = function () {
 	setItems([]);
-	setOldestTs("");
-	setNewestTs("");
+	setOldestTs(Date.now());
+	setNewestTs(Date.now());
 	setHasMore(true);
 	setSwitchSrc(true);
     }
@@ -43,19 +48,24 @@ function FetchScroll(props) {
 	    next_fn();
 	    setSwitchSrc(false);
 	}
+
     }, [switchSrc, next_fn]);
 
     useEffect(() => {
 	const interval = setInterval(() => {
-	    get(props.src + "?after=" + newestTs)
+	    get(base_url + "?after=" + newestTs)
 		.then((x) => {
-		    setItems([...x.data.messages, ...items]);
-		    setNewestTs(items[0].time)
+		    setItems([...items, ...(x.data.filter((item => item.time > newestTs)))]);
+		    setNewestTs(x.data[0].time);
 		})
 		.catch(() => { })
 	}, 1000);
 	return () => clearInterval(interval);
-    }, []);
+    }, [items, newestTs]);
+
+    useEffect (() => {
+	bottom.current.scrollIntoView({behavior: 'smooth'})
+    }, [newestTs, bottom.current])
 
     const wrapFn = props.wrapFn === undefined ? x => x : props.wrapFn;
 
@@ -73,6 +83,7 @@ function FetchScroll(props) {
 		endMessage={
 		    <p style={{ textAlign: 'center' }}>
 		    <b>Yay! You have seen it all</b></p>}>
+		<div ref={bottom}/>
 		{wrapFn(items.map(props.mapFn))}
 	    </InfiniteScroll>
 	</div>
