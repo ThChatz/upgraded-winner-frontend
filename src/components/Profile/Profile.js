@@ -56,7 +56,7 @@ function Profile(props) {
 		.catch(() => { });
 
     const MsgButton = () => (
-        <Button onClick={window.location="#/Conversations"}>
+        <Button onClick={() => window.location="#/Conversations"}>
             Message
         </Button>
     );
