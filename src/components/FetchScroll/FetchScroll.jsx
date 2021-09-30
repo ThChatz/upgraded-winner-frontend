@@ -1,11 +1,13 @@
 import React from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import get from 'axios';
 
 
 function FetchScroll(props) {
+    const bottom = useRef();
+    
     const [hasMore, setHasMore] = useState(true)
 
     const [items, setItems] = useState([]);
@@ -14,6 +16,8 @@ function FetchScroll(props) {
 
     const [newestTs, setNewestTs] = useState(Date.now());
     const [oldestTs, setOldestTs] = useState(Date.now());
+
+    const [scroll, setScroll] = useState(0);
 
     const base_url = process.env.REACT_APP_API_ROOT+props.src;
 
@@ -51,13 +55,17 @@ function FetchScroll(props) {
 	const interval = setInterval(() => {
 	    get(base_url + "?after=" + newestTs)
 		.then((x) => {
-		    setItems([...items, ...(x.data.filter((item => item.time >= newestTs)))]);
-		    setNewestTs(Date.now());
+		    setItems([...items, ...(x.data.filter((item => item.time > newestTs)))]);
+		    setNewestTs(x.data[0].time);
 		})
 		.catch(() => { })
 	}, 1000);
 	return () => clearInterval(interval);
     }, [items, newestTs]);
+
+    useEffect (() => {
+	bottom.current.scrollIntoView({behavior: 'smooth'})
+    }, [newestTs, bottom.current])
 
     const wrapFn = props.wrapFn === undefined ? x => x : props.wrapFn;
 
@@ -75,6 +83,7 @@ function FetchScroll(props) {
 		endMessage={
 		    <p style={{ textAlign: 'center' }}>
 		    <b>Yay! You have seen it all</b></p>}>
+		<div ref={bottom}/>
 		{wrapFn(items.map(props.mapFn))}
 	    </InfiniteScroll>
 	</div>

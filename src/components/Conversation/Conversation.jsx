@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { formHandler, submitHandler } from '../../submitForm';
 import FetchScroll from '../FetchScroll/FetchScroll';
 import get from 'axios';
@@ -43,6 +43,7 @@ const Bubble = (props) =>
 
 
 function Conversation(props) {
+
     return (
 	<>
 	    <div style={{maxHeight: "80vh", 'overflow-y': "scroll"}}>
