@@ -1,6 +1,3 @@
-import { useState, useEffect } from 'react';
-import get from "axios";
-import Loader from './Loader';
 import Media from 'react-bootstrap/Media';
 import ListGroup from 'react-bootstrap/ListGroup';
 import FetchScroll from './FetchScroll/FetchScroll';
@@ -11,7 +8,6 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import UserRef from './UserRef/UserRef';
-import { PinDropSharp } from '@material-ui/icons';
 
 const JobListItem = (props) =>
 	<Accordion adefaultActiveKey="">
@@ -48,7 +44,6 @@ const JobListItem = (props) =>
 							<h3>Full Description</h3>
 							<p>{props.description_full}</p>
 						</Row>
-
 					</Container>
 				</Card.Body>
 			</Accordion.Collapse>

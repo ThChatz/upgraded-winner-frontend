@@ -1,8 +1,8 @@
 import { requestWithCsrf } from "../../submitForm";
-
 import Card from "react-bootstrap/Card"
 import Button from "react-bootstrap/Button";
-
+import {useState} from 'react';
+import get from 'axios';
 
 
 const ConnectBtn = (props) =>
@@ -26,7 +26,7 @@ const UInfoBtn = (props) =>
 
 const UserInfo = (props) =>
 <Card>
-    <Card.Img variant="top" src={props.picture} />
+    <Card.Img variant="top" src={props.picture} style={{maxWidth:"150px", maxHeight:"150px"}} />
     <Card.Body>
 	<Card.Title>{props.first_name + " " + props.last_name}</Card.Title>
 	<Card.Text>{props.job}</Card.Text>
@@ -34,7 +34,17 @@ const UserInfo = (props) =>
     </Card.Body>
 </Card>;
 
+const UserInfoById = (props) => {
+    const [user, setUser] = useState({});
+
+    get(process.env.REACT_APP_API_ROOT + "/user/" + props.id)
+    .then((resp) => setUser(resp.data))
+    .catch(() => {})
+
+    return UserInfo(user);
+}
 
 
+UserInfo.byId = UserInfoById;
 
 export default UserInfo;
