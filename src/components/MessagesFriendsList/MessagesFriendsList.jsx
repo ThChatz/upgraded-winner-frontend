@@ -23,19 +23,17 @@ const FriendListItem = (props) =>
 
 
 function MessagesFriendList(props) {
-    const [curPg, setPg] = useState(0);
     const [hasMore, setHasMore] = useState(true)
 
     const [items, setItems] = useState([]);
 
     const next_fn = function () {
-	get(props.src+'/'+curPg)
+	get(process.env.REACT_APP_API_ROOT+props.src)
 	    .catch(() => {setHasMore(false); return {"data": {"friends": []}}})
 	    .then((response) => response.data.friends)
 	    .then((x) => {setItems(items.concat(x)); return x})
 	    .then((x) => x.length < 20 ? setHasMore(false) : 0)
 	    .catch((x) => null);
-	setPg(curPg+1);
     }
     
 
@@ -49,7 +47,7 @@ function MessagesFriendList(props) {
 		     "boxSizing": "border-box"}}>
 	<InfiniteScroll
 	    dataLength={items.length}
-	    next={next_fn}
+	    next={() => {}}
 	    hasMore={hasMore}
 	    loader={<h4>Loading...</h4>}
 	    endMessage={

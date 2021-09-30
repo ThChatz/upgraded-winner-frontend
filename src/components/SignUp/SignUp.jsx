@@ -115,64 +115,21 @@ const ProfilePic_ = (props) =>
       (
 	  <>
 	      <Container className="d-flex justify-content-between">
-		  <Form id="picUpload" onSubmit={props.picSubmit}>
-		      <Form.Label>Set your profile picture.</Form.Label>
-		      <br />
-		      <Image src={props.imgUrl} style={{ width: 128, height: 128, padding: 12 }} />
-		      <br />
-		      <Form.Control type="file" onChange={props.onChange} name="file" required />
-
-		  </Form>
-		  <Container className="d-flex justify-content-center" style={{ flexDirection: "column" }}>
-		      <Button style={{ align: "middle" }}
-			      form="picUpload"
-			      variant="outline-primary"
-			      onClick={props.onClick}
-			      disabled={props.hasUploaded}
-			      type="submit">
-			  {props.hasUploaded
-			   ? <>Picture<br />already<br />uploaded</> : <>Upload<br />Picture</>}
-		      </Button>
-		  </Container>
+		  <Form.Label>Set your profile picture.</Form.Label>
+		  <br />
+		  <Image src={props.imgUrl} style={{ width: 128, height: 128, padding: 12 }} />
+		  <br />
+		  <Form.Control type="file" onChange={props.onChange} name="image(picture)" form="signUpForm" required />
 	      </Container>
-	      <input type="hidden" form="signUpForm" name="int(picture)" value={props.picId} />
-
 	  </>);
 
 const ProfilePic = (props) => {
     const [pic, setPic] = useState("/my-account/profile-pic.jpg");
-    const [hasUploaded, setHasUploaded] = useState(false);
-    const [hiddenValue, setHiddenValue] = useState(-1);
-
-    const pic_upload_fn = (e) =>
-	  submitHandlerMultipart("post", "/media/image")(e)
-	  .then((resp) => setHiddenValue(resp.data.id));
-
-    const [validated, setValidated] = useState(false);
-
-    const handleSubmit = (e) => {
-	const form = e.currentTarget;
-	if (form.checkValidity() === false) {
-	    e.preventDefault();
-	    e.stopPropagation();
-	}
-
-	setValidated(true);
-    };
-
 
     return <ProfilePic_ onChange={(ev) => {
 			    setPic(URL.createObjectURL(ev.target.files[0]));
-			    setHasUploaded(false)
 			}}
-			imgUrl={pic}
-			hasUploaded={hasUploaded}
-			picId={hiddenValue}
-			picSubmit={(e) => {
-			    handleSubmit(e);
-			    pic_upload_fn(e);
-			    setHasUploaded(true);
-			}} />
+			imgUrl={pic}/>
 }
 
 const SignUp = (props) => {
