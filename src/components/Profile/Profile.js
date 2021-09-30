@@ -51,12 +51,8 @@ function Profile(props) {
     // ProfileName: username
     // ProfilePicurl: url of profile pic
     const context = useContext(App.UserContext);
-    const onClick = (e) => requestWithCsrf("post", "/connection/"+props.id)(e)
+    const onClick = (e) => requestWithCsrf("post", "/connections/"+props.id)(e)
 		.then((r) => { console.log(r); return r })
-		.then((r) => {
-			context.setUser({})
-			window.location = "#"
-		})
 		.catch(() => { });
 
     const MsgButton = () => (
