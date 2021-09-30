@@ -5,6 +5,11 @@ import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import UpdateProfile from "../UpdateProfile/UpdateProfile";
 import OpenPhoto from "../OpenPhotos";
+import { requestWithCsrf } from "../../submitForm";
+import App from '../../App';
+import { useContext } from "react";
+
+
 function EditProfileModal(props) {
 
     const [show, setShow] = useState(false);
@@ -40,10 +45,31 @@ function EditProfileModal(props) {
     );
 }
 
+
 function Profile(props) {
     // props should contain
     // ProfileName: username
     // ProfilePicurl: url of profile pic
+    const context = useContext(App.UserContext);
+    const onClick = (e) => requestWithCsrf("post", "/connection/"+props.id)(e)
+		.then((r) => { console.log(r); return r })
+		.then((r) => {
+			context.setUser({})
+			window.location = "#"
+		})
+		.catch(() => { });
+
+    const MsgButton = () => (
+        <Button onClick={window.location="#/Conversations"}>
+            Message
+        </Button>
+    );
+    // post/connection/user_id
+    const AddButton = () => (
+        <Button onClick={onClick}>
+            Add
+        </Button>
+    );
 
     return (
         <Container className="bg-white shadow rounded ">
@@ -62,7 +88,9 @@ function Profile(props) {
                         <OpenPhoto profilePic = {props.picture}/>
                         {/* <img src={props.profilePic} alt="..." width="130" className="rounded mb-2 img-thumbnail" /> */}
                         <br />
-                        <EditProfileModal />
+                        {props.me ? <EditProfileModal/> : (props.connected ? <MsgButton/> : <AddButton />)}
+                        
+                        {/* <EditProfileModal /> */}
                     </div>
                 </div>
             </div>
