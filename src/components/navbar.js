@@ -52,44 +52,49 @@ const NotificationsItem = (props) =>
 		</Media>
 	</a>;
 
+
+const Notification = (props) => {
+
+	const [userState, setUserState] = useState([]);
+
+	get(`${process.env.REACT_APP_API_ROOT}/users/${props.item.usr}`,
+		{ withCredentials: true })
+		.then(resp => setUserState(resp.data))
+
+	return (
+		<>
+			<a href={"#"}>
+				<Media>
+					<img src={userState.picture} alt={userState.first_name} />
+					<Media.Body>
+						<p>The user {userState.first_name} {props.item.notification}</p>
+					</Media.Body>
+				</Media>
+			</a>
+		</>
+	);
+}
+
 function NavNotifications(props) {
-	const ref = useRef();
-	const [show, setShow] = useState(false);
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+	const [notiflist, setNotifList] = useState([]);
 
-
-		const [curPg, setPg] = useState(0);
-	const [hasMore, setHasMore] = useState(true)
-
-	const [items, setItems] = useState([]);
-
-	const next_fn = function () {
-		get(process.env.REACT_APP_API_ROOT+props.src)
-			.then((response) => response.data.notification_ids)
-			.then((x) => setItems(items.concat(x)))
-			.catch(() => {});
-	}
-
-
-	useEffect(next_fn, []);
+	get(`${process.env.REACT_APP_API_ROOT}/notifications`,
+		{ withCredentials: true })
+		.then(resp => setNotifList(resp.data))
 
 	const notifications_popover = (
 		<Popover>
 			<Popover.Content>
-			<FetchScroll
-				inverse={false}
-				mapFn={NotificationsItem}
-				src={props.src}/>
+				{notiflist.map((item) =>
+					<Notification 
+						item={item}
+					/>
+				)}
 			</Popover.Content>
-			{/* ... */}
 		</Popover>
-		
-		);
-	
+	);
+
 	return (
-
-
 		<OverlayTrigger
 			placement="bottom"
 			trigger="click"
@@ -99,8 +104,6 @@ function NavNotifications(props) {
 				<BsFillBellFill size="30" title="Notifications" /><br />
 			</Nav.Link>
 		</OverlayTrigger>
-
-
 	);
 }
 
@@ -130,7 +133,7 @@ function NavAccount() {
 				<br />
 				<Nav.Link href="#settings">Settings and Privacy </Nav.Link>
 				<Nav.Link href="#help">Help </Nav.Link>
-			    <Button onClick={() => onClick()} variant="link"> Sign Out </Button>
+				<Button onClick={() => onClick()} variant="link"> Sign Out </Button>
 			</Popover.Content>
 		</Popover>
 	);
