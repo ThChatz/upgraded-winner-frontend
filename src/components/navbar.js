@@ -63,14 +63,12 @@ const Notification = (props) => {
 
 	return (
 		<>
-			<a href={"#"}>
-				<Media>
-					<img src={userState.picture} alt={userState.first_name} />
-					<Media.Body>
-						<p>The user {userState.first_name} {props.item.notification}</p>
-					</Media.Body>
-				</Media>
-			</a>
+			<Media>
+				<img src={userState.picture} alt={userState.first_name} />
+				<Media.Body>
+					<p>The user {userState.first_name} {props.item.notification}</p>
+				</Media.Body>
+			</Media>
 		</>
 	);
 }
@@ -86,7 +84,7 @@ function NavNotifications(props) {
 		<Popover>
 			<Popover.Content>
 				{notiflist.map((item) =>
-					<Notification 
+					<Notification
 						item={item}
 					/>
 				)}
